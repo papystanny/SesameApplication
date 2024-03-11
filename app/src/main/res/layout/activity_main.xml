@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
+    android:backgroundTint="#D5D6D6">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="855dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_marginBottom="-1dp">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/graph_accueil" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/biHome"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_border"
+            android:contentDescription="@string/title_home"
+            android:onClick="replaceFragment"
+            android:paddingTop="10dp"
+
+            android:paddingBottom="10dp"
+            android:src="@drawable/drawable_home" />
+
+
+        <ImageButton
+            android:id="@+id/biList"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_border"
+            android:contentDescription="@string/title_list"
+            android:onClick="replaceFragment"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/drawable_list" />
+
+
+        <ImageButton
+            android:id="@+id/biPets"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_border"
+            android:contentDescription="@string/title_pets"
+            android:onClick="replaceFragment"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/drawable_pets" />
+
+
+        <ImageButton
+            android:id="@+id/biSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_border"
+            android:contentDescription="@string/title_settings"
+            android:onClick="replaceFragment"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/drawable_settings" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

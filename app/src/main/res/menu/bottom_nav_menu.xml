@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/icHome"
+        android:icon="@drawable/drawable_home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/biList"
+        android:icon="@drawable/drawable_list"
+        android:title="List"/>
+
+    <item
+        android:id="@+id/biPets"
+        android:icon="@drawable/drawable_pets"
+        android:title="Pets"/>
+
+    <item
+        android:id="@+id/biSettings"
+        android:icon="@drawable/drawable_settings"
+        android:title="Settings"/>
+</menu>

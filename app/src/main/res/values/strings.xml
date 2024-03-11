@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Sésame</string>
+    <string name="title_home">Home</string>
+    <string name="title_pets">Pets</string>
+    <string name="title_list">List</string>
+    <string name="title_settings">Settings</string>
+    <string name="Inside">Entrée</string>
+    <string name="Outside">Sortie</string>
+    <string name="PetPage">Compagnon</string>
+    <string name="AddPetPage">Compagnon +</string>
+    <string name="ActivityPage">Activités</string>
+    <string name="SettingPage">Paramètres</string>
+    <string name="SchedulePage">Créneau de verrouillage</string>
+    <string name="AddSchedulePage">Créneau de verrouillage +</string>
+    <string name="InscriptionBtn">S\'inscrire</string>
+    <string name="ConnexionBtn">Connexion</string>
+    <string name="AddBtn">Ajouter</string>
+    <string name="SendBtn">Envoyer</string>
+    <string name="CancelBtn">Annuler</string>
+    <string name="GoogleBtn">Se connecter avec Google</string>
+    <string name="ProfilePage">Mon profil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

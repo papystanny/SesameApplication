@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:textAlignment="center"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="8dp"
+        android:scaleX="2.6"
+        android:scaleY="2.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039"
+        app:srcCompat="@mipmap/wave_fg_layer" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="Sésame"
+        android:textColor="@color/orange"
+        android:textColorHighlight="@color/orange"
+        android:textColorHint="@color/orange"
+        android:textColorLink="@color/orange"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.110000014" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="Création de votre compte"
+        app:layout_constraintBottom_toTopOf="@+id/inputFirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputFirstName"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="5dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
+        app:layout_constraintEnd_toStartOf="@+id/inputLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_person_pin_circle"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Prénom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/etLastName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <View
+            android:id="@+id/dividerFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputLastName"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/inputFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/custom_input"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Nom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etFirstName"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <View
+            android:id="@+id/dividerLastName"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_email"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Courriel"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/orange"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputMdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail">
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_phone"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Téléphone"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerPhone"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputMdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPhone">
+
+        <EditText
+            android:id="@+id/etMdp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_lock"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Mot de passe"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerMdp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="120dp"
+        android:background="@drawable/custom_input"
+        app:cardBackgroundColor="@color/orange"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputMdp">
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/orange"
+            android:fontFamily="@font/poppins"
+            android:text="S'inscrire"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
