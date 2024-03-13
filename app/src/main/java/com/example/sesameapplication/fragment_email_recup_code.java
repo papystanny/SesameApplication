@@ -69,7 +69,6 @@ public class fragment_email_recup_code extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                      Bundle bundle = new Bundle();
-                    Toast.makeText(getContext(), userEmail,  Toast.LENGTH_SHORT).show();
                      bundle.putString("email",userEmail);
                     if (getArguments() != null && getArguments().containsKey("email")) {
                         testE = getArguments().getString("email");
@@ -77,10 +76,8 @@ public class fragment_email_recup_code extends Fragment {
                     else{
                         Toast.makeText(getContext(), "la faute est ici", Toast.LENGTH_SHORT).show();
                     }
-                //    Log.e("code_recup", testE);
-                     Toast.makeText(getContext(), testE, Toast.LENGTH_SHORT).show();
-                 //   NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                  //  navController.navigate(R.id.fromEmailRecupCodeToPasswordRecup);
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                    navController.navigate(R.id.fromEmailRecupCodeToPasswordRecup,bundle);
                 } else {
                     Toast.makeText(getContext(), "Code invalide ou expiré", Toast.LENGTH_SHORT).show();
                 }
