@@ -2,8 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">172.16.207.146</domain>
     </domain-config>
-
-    <!-- Autoriser le trafic en clair pour tous les domaines (non recommandé pour la production) -->
-    <!-- <base-config cleartextTrafficPermitted="true" /> -->
 </network-security-config>
