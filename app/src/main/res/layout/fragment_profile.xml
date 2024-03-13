@@ -8,12 +8,13 @@
     android:textAlignment="center"
     tools:context=".MainActivity">
 
+
     <TextView
-        android:id="@+id/tvTitleSetting"
+        android:id="@+id/tvTitleProfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="@string/SettingPage"
+        android:text="@string/ProfilePage"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"
@@ -24,151 +25,142 @@
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998" />
+        app:layout_constraintVertical_bias="0.26" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btCardProfilSetting"
+        android:id="@+id/inputEmailProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/custom_input"
-        android:foregroundGravity="center"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
         app:contentPaddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleSetting">
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleProfil">
 
-        <Button
-            android:id="@+id/bProfilSetting"
+        <EditText
+            android:id="@+id/etEmailProfil"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray"
-            android:drawableLeft="@drawable/drawable_profil"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/drawable_email"
+            android:drawableEnd="@drawable/drawable_close"
             android:drawablePadding="10dp"
+            android:ems="10"
             android:fontFamily="@font/poppins"
-            android:onClick="replaceFragment"
-            android:text="Profil et préférences"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textColorHighlight="#000000"
-            android:textColorLink="#000000"
-            android:textIsSelectable="false"
-            android:textSize="18sp" />
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingEnd="10dp"
+            android:text="Courriel"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/lightGray" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btCardPetsSetting"
+        android:id="@+id/inputFirstNameProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/custom_input"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
         app:contentPaddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCardProfilSetting">
+        app:layout_constraintTop_toBottomOf="@+id/inputEmailProfil">
 
-        <Button
-            android:id="@+id/bMyPetsSetting"
+        <EditText
+            android:id="@+id/etFirstNameProfil"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray"
-            android:drawableLeft="@drawable/drawable_bone"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/drawable_person_pin_circle"
             android:drawablePadding="10dp"
+            android:ems="10"
             android:fontFamily="@font/poppins"
-            android:text="Vos compagnons"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textColorHighlight="#000000"
-            android:textColorLink="#000000"
-            android:textIsSelectable="false"
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingEnd="10dp"
+            android:text="Prénom"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/lightGray"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btCardLanguageSetting"
+        android:id="@+id/inputNameProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/custom_input"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
         app:contentPaddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCardPetsSetting">
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstNameProfil">
 
-        <Button
-            android:id="@+id/bLanguageSetting"
+        <EditText
+            android:id="@+id/etNameProfil"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray"
-            android:drawableLeft="@drawable/drawable_language"
-            android:drawableRight="@drawable/drawable_chevron"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/drawable_person_pin_circle"
             android:drawablePadding="10dp"
+            android:ems="10"
             android:fontFamily="@font/poppins"
-            android:text="Français"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textColorHighlight="#000000"
-            android:textColorLink="#000000"
-            android:textIsSelectable="false"
-            android:textSize="18sp" />
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingEnd="10dp"
+            android:text="Nom"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/lightGray" />
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/btCardTimeZoneSetting"
+        android:id="@+id/inputPhoneProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/custom_input"
+        android:padding="10dp"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
         app:contentPaddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCardLanguageSetting">
+        app:layout_constraintTop_toBottomOf="@+id/inputNameProfil">
 
-        <Button
-            android:id="@+id/bTimeZoneSetting"
+        <EditText
+            android:id="@+id/etPhoneProfil"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray"
-            android:drawableLeft="@drawable/drawable_time_zone"
-            android:drawableRight="@drawable/drawable_chevron"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/drawable_phone"
             android:drawablePadding="10dp"
+            android:ems="10"
             android:fontFamily="@font/poppins"
-            android:text="UTC-5"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textColorHighlight="#000000"
-            android:textColorLink="#000000"
-            android:textIsSelectable="false"
-            android:textSize="18sp" />
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingEnd="10dp"
+            android:text="Numéro de téléphone"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/lightGray" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btCardLogoutSetting"
+        android:id="@+id/btCardChangePassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/custom_input"
         app:cardBackgroundColor="@color/orange"
         app:cardCornerRadius="15dp"
@@ -178,18 +170,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCardTimeZoneSetting">
+        app:layout_constraintTop_toBottomOf="@+id/inputPhoneProfil">
 
         <Button
-            android:id="@+id/bLogoutSetting"
+            android:id="@+id/btChangePassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/orange"
-            android:drawableLeft="@drawable/drawable_logout"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
-            android:text="Déconnexion"
-            android:textAlignment="viewStart"
+            android:text="Changer"
+            android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/gray"
             android:textColorHighlight="#000000"
@@ -197,5 +188,6 @@
             android:textIsSelectable="false"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

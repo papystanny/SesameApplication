@@ -16,13 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.json.JSONObject;
 
-import java.io.IOException;
-
-import reseau_api.ApiErrorResponse;
 import reseau_api.InterfaceServer;
 import reseau_api.RetrofitInstance;
 import retrofit2.Call;
@@ -32,7 +27,7 @@ import unique.LoginResponse;
 import unique.User;
 
 
-public class fragment_create_account extends Fragment {
+public class CreateAccountFragment extends Fragment {
     private EditText etFirstName, etLastName, etEmail, etPhone, etPassword;
     private Button btRegister;
 
@@ -137,7 +132,7 @@ public class fragment_create_account extends Fragment {
                     editor.apply();
 
                     Toast.makeText(getContext(), "Compte créé avec succès", Toast.LENGTH_LONG).show();
-                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
                     navController.navigate(R.id.fromRegisterToHome);
                 } else {
                     // Gestion des erreurs

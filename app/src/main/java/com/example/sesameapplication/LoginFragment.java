@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,16 +22,11 @@ import reseau_api.RetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import unique.LoginResponse;
 import unique.User;
 
-import com.google.gson.Gson;
 
-
-
-public class fragment_login extends Fragment {
+public class LoginFragment extends Fragment {
 
     private EditText etEmail, etPassword;
     private Button btLogin ;
@@ -71,7 +65,7 @@ public class fragment_login extends Fragment {
             @Override
 
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
                 navController.navigate(R.id.fromLoginToRegister);
             }
         });
@@ -80,7 +74,7 @@ public class fragment_login extends Fragment {
             @Override
 
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
                 navController.navigate(R.id.fromHomeToEmailRecup);
             }
         });
@@ -131,7 +125,7 @@ public class fragment_login extends Fragment {
 
                     editor.apply();
 
-                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
                     navController.navigate(R.id.fromLoginToHome);
 
                     Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();

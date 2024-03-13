@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class fragment_password_recup extends Fragment {
+public class PasswordRecupFragment extends Fragment {
 
     private EditText etPassword;
     private EditText etPasswordConfirm;

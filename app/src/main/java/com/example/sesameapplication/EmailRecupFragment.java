@@ -26,7 +26,7 @@ import retrofit2.Response;
 import unique.User;
 
 
-public class fragment_email_recup extends Fragment {
+public class EmailRecupFragment extends Fragment {
 
     private EditText etEmail;
 
@@ -83,7 +83,7 @@ public class fragment_email_recup extends Fragment {
         builder.setMessage("Un code de réinitialisation a été envoyé, il sera valide pendant 10 minutes. Veuillez vérifier votre courriel." )
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                        NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
                         Bundle bundle = new Bundle();
                         bundle.putString("userEmail", etEmail.getText().toString());
                         navController.navigate(R.id.fromEmailRecupToEmailRecupCode, bundle);

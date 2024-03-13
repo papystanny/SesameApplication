@@ -44,7 +44,6 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         vh.tvStatus.setText(list.get(position).getStatus() ? "Entrée" : "Sortie");
-        vh.tvStatus.setCompoundDrawablesWithIntrinsicBounds(list.get(position).getStatus() ? R.drawable.drawable_input_circle : R.drawable.drawable_output_circle, 0, 0, 0);
     }
 
     @Override

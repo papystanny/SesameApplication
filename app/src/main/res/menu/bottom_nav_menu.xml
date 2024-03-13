@@ -5,17 +5,17 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/biList"
+        android:id="@+id/ibList"
         android:icon="@drawable/drawable_list"
         android:title="List"/>
 
     <item
-        android:id="@+id/biPets"
+        android:id="@+id/ibPets"
         android:icon="@drawable/drawable_pets"
         android:title="Pets"/>
 
     <item
-        android:id="@+id/biSettings"
+        android:id="@+id/ibSettings"
         android:icon="@drawable/drawable_settings"
         android:title="Settings"/>
 </menu>

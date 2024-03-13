@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,10 +23,13 @@ import others.AdapterListHomePage;
 import unique.Pet;
 
 
-public class fragment_home extends Fragment implements AdapterListHomePage.InterfacePet {
+public class HomeFragment extends Fragment implements AdapterListHomePage.InterfacePet {
 
     View view;
     RecyclerView rvHomePage;
+    ImageView ibHomeLock;
+    TextView tvMsg;
+    boolean isLocked = true;
     public static List<Pet> listPet = new ArrayList<>();
 
     @Override
@@ -32,6 +37,9 @@ public class fragment_home extends Fragment implements AdapterListHomePage.Inter
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        if (listPet.size() > 0) {
+            listPet.clear();
+        }
         listPet.add(new Pet("Rex", "Rexou", "Chien", "ic_dog", "123456", true));
         listPet.add(new Pet("Mina", "Minou", "Chat", "ic_dog", "789456", false));
         Log.d("ListPet", listPet.toString());
@@ -46,6 +54,25 @@ public class fragment_home extends Fragment implements AdapterListHomePage.Inter
 
         // Appeler la méthode pour afficher les SharedPreferences
         displaySharedPreferences();
+
+        // Récupération des éléments de la vue
+        ibHomeLock = view.findViewById(R.id.ibHomeLock);
+        tvMsg = view.findViewById(R.id.tvMsg);
+        ibHomeLock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLocked) {
+                    ibHomeLock.setImageResource(R.drawable.close);
+                    tvMsg.setText("La porte est verrouillée");
+
+                } else {
+                    ibHomeLock.setImageResource(R.drawable.open);
+                    tvMsg.setText("La porte est déverrouillée");
+                }
+                isLocked = !isLocked;
+            }
+        });
+
         return view;
     }
 

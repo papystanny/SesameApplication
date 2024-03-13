@@ -10,19 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import reseau_api.ApiErrorResponse;
 import reseau_api.RetrofitInstance;
 import reseau_api.SimpleApiResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import reseau_api.InterfaceServer;
-import unique.LoginResponse;
 
-public class fragment_email_recup_code extends Fragment {
+public class CodeRecupFragment extends Fragment {
 
     private EditText etCode;
     private Button btVerify;
@@ -33,7 +29,7 @@ public class fragment_email_recup_code extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_email_recup_code, container, false);
+        View view = inflater.inflate(R.layout.fragment_code_recup, container, false);
         etCode = view.findViewById(R.id.etEmail); // Assurez-vous que cet ID correspond à votre EditText pour le code
         btVerify = view.findViewById(R.id.btLogin); // Assurez-vous que cet ID correspond à votre Button
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_login"
-        android:name="com.example.sesameapplication.fragment_login"
+        android:name="com.example.sesameapplication.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_create_account"
-        android:name="com.example.sesameapplication.fragment_create_account"
+        android:name="com.example.sesameapplication.CreateAccountFragment"
         android:label="fragment_create_account"
         tools:layout="@layout/fragment_create_account" >
         <action
@@ -31,17 +31,17 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_home"
-        android:name="com.example.sesameapplication.fragment_home"
+        android:name="com.example.sesameapplication.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="com.example.sesameapplication.fragment_settings"
+        android:name="com.example.sesameapplication.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/fragment_email_recup"
-        android:name="com.example.sesameapplication.fragment_email_recup"
+        android:name="com.example.sesameapplication.EmailRecupFragment"
         android:label="fragment_email_recup"
         tools:layout="@layout/fragment_email_recup" >
         <action
@@ -50,16 +50,16 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_email_recup_code"
-        android:name="com.example.sesameapplication.fragment_email_recup_code"
+        android:name="com.example.sesameapplication.CodeRecupFragment"
         android:label="fragment_email_recup_code"
-        tools:layout="@layout/fragment_email_recup_code" >
+        tools:layout="@layout/fragment_code_recup" >
         <action
             android:id="@+id/fromEmailRecupCodeToPasswordRecup"
             app:destination="@id/fragment_password_recup" />
     </fragment>
     <fragment
         android:id="@+id/fragment_password_recup"
-        android:name="com.example.sesameapplication.fragment_password_recup"
+        android:name="com.example.sesameapplication.PasswordRecupFragment"
         android:label="fragment_password_recup"
         tools:layout="@layout/fragment_password_recup" >
         <action

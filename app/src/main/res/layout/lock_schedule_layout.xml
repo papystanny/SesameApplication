@@ -1,0 +1,203 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/llDotw"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_input"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvDimanche"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Dim"
+                    android:textAlignment="center" />
+                <View
+                    android:id="@+id/div1"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@color/black"
+                    android:scaleX="0.4"
+                    android:scaleY="0.3" />
+                <TextView
+                    android:id="@+id/tvLundi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Lun"
+                    android:textAlignment="center" />
+                <View
+                    android:id="@+id/div2"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@color/black"
+                    android:scaleX="0.4"
+                    android:scaleY="0.3" />
+                <TextView
+                    android:id="@+id/tvMardi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Mar"
+                    android:textAlignment="center" />
+                <View
+                    android:id="@+id/div3"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@color/black"
+                    android:scaleX="0.4"
+                    android:scaleY="0.3" />
+                <TextView
+                    android:id="@+id/tvMercredi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Mer"
+                    android:textAlignment="center" />
+                <View
+                    android:id="@+id/div4"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@color/black"
+                    android:scaleX="0.4"
+                    android:scaleY="0.3" />
+                <TextView
+                    android:id="@+id/tvJeudi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Jeu"
+                    android:textAlignment="center" />
+                <View
+                    android:id="@+id/div5"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@color/black"
+                    android:scaleX="0.4"
+                    android:scaleY="0.3" />
+                <TextView
+                    android:id="@+id/tvVendredi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Ven"
+                    android:textAlignment="center" />
+                <View
+                    android:id="@+id/div6"
+                    android:layout_width="15dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/radiobutton_off_background"
+                    android:backgroundTint="@color/black"
+                    android:scaleX="0.4"
+                    android:scaleY="0.3" />
+                <TextView
+                    android:id="@+id/tvSamedi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:text="Sam"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/llTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvStartTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/righteous"
+                        android:text="8:00"
+                        android:textAlignment="center"
+                        android:textSize="34sp" />
+                    <View
+                        android:id="@+id/divTime"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/editbox_background_normal"
+                        android:backgroundTint="@color/black"
+                        android:scaleX="1"
+                        android:scaleY="0.3" />
+                    <TextView
+                        android:id="@+id/tvEndTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/righteous"
+                        android:text="20:00"
+                        android:textAlignment="center"
+                        android:textSize="34sp" />
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:clickable="false"
+                    android:includeFontPadding="false"
+                    android:scaleX="1.75"
+                    android:scaleY="1.75"
+                    android:showText="false"
+                    android:textOff=""
+                    android:textOn=""
+                    android:translationX="-40dp"
+                    android:thumbTint="@drawable/switch_thumb_selector"
+                    android:trackTint="@drawable/switch_track_selector"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

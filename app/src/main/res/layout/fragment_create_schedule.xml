@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:background="@color/transparent"
+
+    android:textAlignment="center"
+
+    tools:context=".MainActivity">
+
+    <TextView
+
+        android:id="@+id/tvTitle"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="10dp"
+
+        android:fontFamily="@font/righteous"
+
+        android:text="Créneau de vérouillage +"
+
+        android:textColor="@color/orange"
+
+        android:textColorHighlight="@color/orange"
+
+        android:textColorHint="@color/orange"
+
+        android:textColorLink="@color/orange"
+
+        android:textSize="45sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.15"
+
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <LinearLayout
+
+        android:id="@+id/llContent"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toTopOf="@+id/llTime"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintVertical_bias="0.9">
+
+        <TextView
+
+            android:id="@+id/tvDotwLabel"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="20dp"
+
+            android:fontFamily="@font/poppins"
+
+            android:text="Jour de la semaine"
+            android:textSize="16sp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/dotwCard"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="20dp"
+
+            android:layout_marginBottom="30dp"
+
+            app:cardBackgroundColor="@color/gray"
+
+            app:cardCornerRadius="15dp"
+
+            app:cardElevation="15dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/inputPhone"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
+
+            <LinearLayout
+
+                android:id="@+id/llDotw"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/custom_input"
+
+                android:gravity="center"
+
+                android:orientation="horizontal"
+
+                android:padding="20dp">
+
+                <TextView
+
+                    android:id="@+id/tvDimanche"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:background="@drawable/custom_input"
+
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/poppins"
+                    android:text="D"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <View
+
+                    android:id="@+id/div1"
+
+                    android:layout_width="15dp"
+
+                    android:layout_height="30dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:drawable/radiobutton_off_background"
+
+                    android:backgroundTint="@color/black"
+
+                    android:scaleX="0.4"
+
+                    android:scaleY="0.3" />
+
+                <TextView
+
+                    android:id="@+id/tvLundi"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:background="@drawable/custom_input"
+
+                    android:backgroundTint="@color/transparent"
+
+                    android:fontFamily="@font/poppins"
+                    android:text="L"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <View
+
+                    android:id="@+id/div2"
+
+                    android:layout_width="15dp"
+
+                    android:layout_height="30dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:drawable/radiobutton_off_background"
+
+                    android:backgroundTint="@color/black"
+
+                    android:scaleX="0.4"
+
+                    android:scaleY="0.3" />
+
+                <TextView
+
+                    android:id="@+id/tvMardi"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:background="@drawable/custom_input"
+
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/poppins"
+
+                    android:text="M"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+
+                    android:textSize="20sp" />
+
+                <View
+
+                    android:id="@+id/div3"
+
+                    android:layout_width="15dp"
+
+                    android:layout_height="30dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:drawable/radiobutton_off_background"
+
+                    android:backgroundTint="@color/black"
+
+                    android:scaleX="0.4"
+
+                    android:scaleY="0.3" />
+
+                <TextView
+
+                    android:id="@+id/tvMercredi"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:background="@drawable/custom_input"
+
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/poppins"
+                    android:text="M"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <View
+
+                    android:id="@+id/div4"
+
+                    android:layout_width="15dp"
+
+                    android:layout_height="30dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:drawable/radiobutton_off_background"
+
+                    android:backgroundTint="@color/black"
+
+                    android:scaleX="0.4"
+
+                    android:scaleY="0.3" />
+
+                <TextView
+
+                    android:id="@+id/tvJeudi"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:background="@drawable/custom_input"
+
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/poppins"
+                    android:text="J"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <View
+
+                    android:id="@+id/div5"
+
+                    android:layout_width="15dp"
+
+                    android:layout_height="30dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:drawable/radiobutton_off_background"
+
+                    android:backgroundTint="@color/black"
+
+                    android:scaleX="0.4"
+
+                    android:scaleY="0.3" />
+
+                <TextView
+
+                    android:id="@+id/tvVendredi"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_input"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/poppins"
+                    android:text="V"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <View
+
+                    android:id="@+id/div6"
+
+                    android:layout_width="15dp"
+
+                    android:layout_height="30dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:drawable/radiobutton_off_background"
+
+                    android:backgroundTint="@color/black"
+
+                    android:scaleX="0.4"
+
+                    android:scaleY="0.3" />
+
+                <TextView
+
+                    android:id="@+id/tvSamedi"
+
+                    android:layout_width="25dp"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:background="@drawable/custom_input"
+
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/poppins"
+                    android:text="S"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/llTime"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="10dp"
+
+        android:gravity="center"
+
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toTopOf="@+id/tvLockPreview"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llContent">
+
+        <LinearLayout
+
+            android:id="@+id/llStartTime"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="10dp"
+
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/tvStartTimeLabel"
+
+                android:layout_width="150dp"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="10dp"
+
+                android:fontFamily="@font/poppins"
+
+                android:text="Devérouillage"
+
+                android:textAlignment="center"
+
+                android:textSize="16sp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/startTimeCard"
+
+                android:layout_width="150dp"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="25dp"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp">
+
+                <EditText
+
+                    android:id="@+id/etStartTime"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+
+                    android:fontFamily="@font/righteous"
+
+                    android:inputType="time"
+
+                    android:text="8:00"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+
+                    android:textColorHint="@color/black"
+                    android:textSize="34sp" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/llEndTime"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="10dp"
+
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/tvEndTimeLabel"
+
+                android:layout_width="150dp"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="10dp"
+
+                android:fontFamily="@font/poppins"
+
+                android:text="Vérouillage"
+
+                android:textAlignment="center"
+
+                android:textSize="16sp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/endTimeCard"
+
+                android:layout_width="150dp"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="25dp"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp">
+
+                <EditText
+
+                    android:id="@+id/etEndTime"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+
+                    android:fontFamily="@font/righteous"
+
+                    android:inputType="time"
+
+                    android:text="20:00"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+
+                    android:textColorHint="@color/black"
+                    android:textSize="34sp" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+
+        android:id="@+id/tvLockPreview"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/poppins"
+
+        android:text="Vérouillage prévu à 20h"
+
+        android:textColor="@color/lightGray"
+
+        app:layout_constraintBottom_toTopOf="@+id/btCardChangePassword"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTime" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btCardAddSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/custom_input"
+        app:cardBackgroundColor="@color/orange"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLockPreview">
+
+        <Button
+            android:id="@+id/btAddSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/AddBtn"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/gray"
+            android:textColorHighlight="#000000"
+            android:textColorLink="#000000"
+            android:textIsSelectable="false"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
