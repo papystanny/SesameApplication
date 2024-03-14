@@ -44,7 +44,14 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        vh.tvStatus.setText(list.get(position).getIsOutside() ? "Entrée" : "Sortie");
+        if (list.get(position).getIsOutside() == 0)
+        {
+            vh.tvStatus.setText("Entrée");
+        }
+        else
+        {
+            vh.tvStatus.setText("Sortie");
+        }
         Picasso.get().load(list.get(position).getImg()).into(vh.ibPet);
     }
 
@@ -73,17 +80,15 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
             super(itemView);
 
             tvStatus = itemView.findViewById(R.id.tvStatus);
-            /*ibPet = itemView.findViewById(R.id.ivPetPhoto);
+            ibPet = itemView.findViewById(R.id.ivPetPhoto);
 
 
             ibPet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     interfacePet.gestionClick(getLayoutPosition(), list.get(getLayoutPosition()));
-
                 }
-            });*/
-
+            });
             tvStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

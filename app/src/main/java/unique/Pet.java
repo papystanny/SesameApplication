@@ -1,43 +1,39 @@
 package unique;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Pet {
 
     @SerializedName("id")
     int id;
-    @SerializedName("id_user")
-    int id_user;
     @SerializedName("name")
     String name;
     @SerializedName("nickname")
     String nickname;
     @SerializedName("type")
     String type;
-    @SerializedName("birth_date")
-    String birthdate;
     @SerializedName("img")
     String img;
     @SerializedName("collar_tag")
     String collar_tag;
     @SerializedName("is_outside")
-    Boolean isOutside;
+    int isOutside;
 
-    public Boolean getIsOutside() {
+    public int getIsOutside() {
         return isOutside;
     }
 
-    public void setIsOutside(Boolean isOutside) {
+    public void setIsOutside(int isOutside) {
         this.isOutside = isOutside;
     }
 
-    public Pet(int id, int id_user, String name, String nickname, String type, String birthdate, String img, String collar_tag, Boolean isOutside) {
+    public Pet(int id, String name, String nickname, String type, String img, String collar_tag, int isOutside) {
         this.id = id;
-        this.id_user = id_user;
         this.name = name;
         this.nickname = nickname;
         this.type = type;
-        this.birthdate = birthdate;
         this.img = img;
         this.collar_tag = collar_tag;
         this.isOutside = isOutside;
@@ -86,4 +82,17 @@ public class Pet {
         this.collar_tag = collar_tag;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", type='" + type + '\'' +
+                ", img='" + img + '\'' +
+                ", collar_tag='" + collar_tag + '\'' +
+                ", isOutside=" + isOutside +
+                '}';
+    }
 }

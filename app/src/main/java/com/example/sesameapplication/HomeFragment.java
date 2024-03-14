@@ -34,20 +34,26 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
     RecyclerView rvHomePage;
     ImageView ibHomeLock;
     TextView tvMsg;
-    boolean isLocked = true;
     AdapterListHomePage.InterfacePet interfacePet;
+    AdapterListHomePage adapterListHomePage;
+    boolean isLocked = true;
     private List<Pet> listPet = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         interfacePet = this;
 
         if (listPet.size() > 0) {
             listPet.clear();
         }
         getPets();
+        rvHomePage = view.findViewById(R.id.rvHomePage);
+        rvHomePage.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterListHomePage = new AdapterListHomePage(listPet, interfacePet);
+        rvHomePage.setAdapter(adapterListHomePage);
 
         // Appeler la méthode pour afficher les SharedPreferences
         displaySharedPreferences();
@@ -106,14 +112,18 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
             @Override
             public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    listPet = response.body();
-                    rvHomePage = view.findViewById(R.id.rvHomePage);
-                    rvHomePage.setHasFixedSize(true);
-                    rvHomePage.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-                    AdapterListHomePage adapterList = new AdapterListHomePage(listPet, interfacePet);
-                    rvHomePage.setAdapter(adapterList);
-                    Log.d("Pets", "RESPONSE : " + listPet.toString());
-
+                    for (Pet pet : response.body()) {
+                        int id = pet.getId();
+                        String name = pet.getName();
+                        String nickname = pet.getNickname();
+                        String type = pet.getType();
+                        String img = pet.getImg();
+                        String collarTag = pet.getCollar_tag();
+                        int isOutside = pet.getIsOutside();
+                        listPet.add(new Pet(id, name, nickname, type, img, collarTag, isOutside));
+                        adapterListHomePage.notifyDataSetChanged();
+                    }
+                    Log.d("Pets", "SUCCESS : " + listPet);
                 } else {
                     Toast.makeText(getContext(), "BAD RESPONSE : Erreur lors de la récupération des animaux", Toast.LENGTH_SHORT).show();
                 }
@@ -121,7 +131,7 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
 
             @Override
             public void onFailure(Call<List<Pet>> call, Throwable t) {
-                Toast.makeText(getContext(), "FAILURE : Erreur lors de la récupération des animaux", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "FAILURE : " + t, Toast.LENGTH_SHORT).show();
             }
         });
     }
