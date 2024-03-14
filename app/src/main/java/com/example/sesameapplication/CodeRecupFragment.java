@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import reseau_api.RetrofitInstance;
 import reseau_api.SimpleApiResponse;
@@ -75,8 +77,8 @@ public class CodeRecupFragment extends Fragment {
                     }
                 //    Log.e("code_recup", testE);
                      Toast.makeText(getContext(), testE, Toast.LENGTH_SHORT).show();
-                 //   NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                  //  navController.navigate(R.id.fromEmailRecupCodeToPasswordRecup);
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                    navController.navigate(R.id.fromEmailRecupCodeToPasswordRecup,bundle);
                 } else {
                     Toast.makeText(getContext(), "Code invalide ou expiré", Toast.LENGTH_SHORT).show();
                 }

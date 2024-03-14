@@ -83,7 +83,7 @@ public class EmailRecupFragment extends Fragment {
         builder.setMessage("Un code de réinitialisation a été envoyé, il sera valide pendant 10 minutes. Veuillez vérifier votre courriel." )
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
+                        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                         Bundle bundle = new Bundle();
                         bundle.putString("userEmail", etEmail.getText().toString());
                         navController.navigate(R.id.fromEmailRecupToEmailRecupCode, bundle);

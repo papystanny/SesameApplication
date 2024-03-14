@@ -132,7 +132,7 @@ public class CreateAccountFragment extends Fragment {
                     editor.apply();
 
                     Toast.makeText(getContext(), "Compte créé avec succès", Toast.LENGTH_LONG).show();
-                    NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                     navController.navigate(R.id.fromRegisterToHome);
                 } else {
                     // Gestion des erreurs

@@ -3,6 +3,8 @@ package com.example.sesameapplication;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,7 +84,8 @@ public class PasswordRecupFragment extends Fragment {
             public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    // Redirection ou autre logique post-réinitialisation
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                    navController.navigate(R.id.fromPasswordRecupToHome);
                 } else {
                     Toast.makeText(getContext(), "Une erreur s'est produite", Toast.LENGTH_SHORT).show();
                 }

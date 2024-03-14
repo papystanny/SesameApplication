@@ -38,7 +38,11 @@
         android:id="@+id/fragment_settings"
         android:name="com.example.sesameapplication.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/fromSettingsToLogin"
+            app:destination="@id/fragment_login" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_email_recup"
         android:name="com.example.sesameapplication.EmailRecupFragment"
@@ -66,4 +70,14 @@
             android:id="@+id/fromPasswordRecupToHome"
             app:destination="@id/fragment_login" />
     </fragment>
+    <fragment
+        android:id="@+id/petsFragment3"
+        android:name="com.example.sesameapplication.PetsFragment"
+        android:label="PetsFragment" />
+    <fragment
+        android:id="@+id/petActivityFragment2"
+        android:name="com.example.sesameapplication.PetActivityFragment"
+        android:label="PetActivityFragment" />
+
+
 </navigation>

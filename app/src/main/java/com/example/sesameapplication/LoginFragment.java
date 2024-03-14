@@ -43,6 +43,8 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        checkLogin();
+
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etMdp);
         btLogin = view.findViewById(R.id.btLogin);
@@ -65,7 +67,7 @@ public class LoginFragment extends Fragment {
             @Override
 
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                 navController.navigate(R.id.fromLoginToRegister);
             }
         });
@@ -74,10 +76,24 @@ public class LoginFragment extends Fragment {
             @Override
 
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                 navController.navigate(R.id.fromHomeToEmailRecup);
             }
         });
+    }
+
+    private void checkLogin() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+
+        // Vérifiez si le token existe déjà
+        if (token != null) {
+
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+            navController.navigate(R.id.fromLoginToHome);
+
+            Toast.makeText(getContext(), "Connexion automatique réussie", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void attemptLogin() {
@@ -125,8 +141,9 @@ public class LoginFragment extends Fragment {
 
                     editor.apply();
 
-                    NavController navController = Navigation.findNavController(requireActivity(), R.id.frameLayout);
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                     navController.navigate(R.id.fromLoginToHome);
+
 
                     Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
                 } else {
