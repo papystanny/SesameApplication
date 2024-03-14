@@ -1,12 +1,18 @@
 package reseau_api;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import unique.LoginResponse;
+import unique.Pet;
 import unique.User;
 
 public interface InterfaceServer {
@@ -45,4 +51,8 @@ public interface InterfaceServer {
                                  @Field("email") String email,
                                  @Field("password") String password);
 
+    @GET("api/pets/{id}")
+    Call<List<Pet>> getPetsByUser(
+            @Header("Authorization") String authToken,
+            @Path("id") int userId);
 }

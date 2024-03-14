@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sesameapplication.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,7 +44,8 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        vh.tvStatus.setText(list.get(position).getStatus() ? "Entrée" : "Sortie");
+        vh.tvStatus.setText(list.get(position).getIsOutside() ? "Entrée" : "Sortie");
+        Picasso.get().load(list.get(position).getImg()).into(vh.ibPet);
     }
 
     @Override

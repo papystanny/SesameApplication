@@ -20,6 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import others.AdapterListHomePage;
+import reseau_api.InterfaceServer;
+import reseau_api.RetrofitInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import unique.Pet;
 
 
@@ -30,27 +35,19 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
     ImageView ibHomeLock;
     TextView tvMsg;
     boolean isLocked = true;
-    public static List<Pet> listPet = new ArrayList<>();
+    AdapterListHomePage.InterfacePet interfacePet;
+    private List<Pet> listPet = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        interfacePet = this;
 
         if (listPet.size() > 0) {
             listPet.clear();
         }
-        listPet.add(new Pet("Rex", "Rexou", "Chien", "ic_dog", "123456", true));
-        listPet.add(new Pet("Mina", "Minou", "Chat", "ic_dog", "789456", false));
-        Log.d("ListPet", listPet.toString());
-        rvHomePage = view.findViewById(R.id.rvHomePage);
-        rvHomePage.setHasFixedSize(true);
-        rvHomePage.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        AdapterListHomePage adapterList = new AdapterListHomePage(listPet, this);
-        rvHomePage.setAdapter(adapterList);
-
-
-
+        getPets();
 
         // Appeler la méthode pour afficher les SharedPreferences
         displaySharedPreferences();
@@ -94,6 +91,39 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
         Log.d("SharedPreferences", "Lastname: " + lastname);
         Log.d("SharedPreferences", "Phone: " + phone);
         Log.d("SharedPreferences", "Email: " + email);
+    }
+
+    private void getPets() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        String authToken = "Bearer " + token; // Formatage du token
+        int id = sharedPreferences.getInt("id", -1);
+
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<List<Pet>> call = interfaceServer.getPetsByUser(authToken, id);
+
+        call.enqueue(new Callback<List<Pet>>() {
+            @Override
+            public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listPet = response.body();
+                    rvHomePage = view.findViewById(R.id.rvHomePage);
+                    rvHomePage.setHasFixedSize(true);
+                    rvHomePage.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                    AdapterListHomePage adapterList = new AdapterListHomePage(listPet, interfacePet);
+                    rvHomePage.setAdapter(adapterList);
+                    Log.d("Pets", "RESPONSE : " + listPet.toString());
+
+                } else {
+                    Toast.makeText(getContext(), "BAD RESPONSE : Erreur lors de la récupération des animaux", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Pet>> call, Throwable t) {
+                Toast.makeText(getContext(), "FAILURE : Erreur lors de la récupération des animaux", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
