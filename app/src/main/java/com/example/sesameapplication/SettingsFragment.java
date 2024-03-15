@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class SettingsFragment extends Fragment {
 
-    private Button logoutButton;
+    private Button logoutButton, profileButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,11 +33,20 @@ public class SettingsFragment extends Fragment {
 
         // Initialize the logout button
         logoutButton = view.findViewById(R.id.bLogoutSetting);
+        profileButton = view.findViewById(R.id.bProfilSetting);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logoutUser();
+            }
+        });
+
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.action_fragment_settings_to_profileFragment);
             }
         });
 

@@ -39,7 +39,7 @@ public class CreateAccountFragment extends Fragment {
         etEmail = view.findViewById(R.id.etEmail);
         etPhone = view.findViewById(R.id.etPhone);
         etPassword = view.findViewById(R.id.etMdp);
-        btRegister = view.findViewById(R.id.btLogin);
+        btRegister = view.findViewById(R.id.btRegister);
 
         btRegister.setOnClickListener(v -> attemptRegister());
         return view;

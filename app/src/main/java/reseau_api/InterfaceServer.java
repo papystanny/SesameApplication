@@ -13,6 +13,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import unique.LoginResponse;
 import unique.Pet;
+import unique.PetActivity;
 import unique.User;
 
 public interface InterfaceServer {
@@ -55,4 +56,9 @@ public interface InterfaceServer {
     Call<List<Pet>> getPetsByUser(
             @Header("Authorization") String authToken,
             @Path("id") int userId);
+
+    @GET("api/activity/{userID}")
+    Call<List<PetActivity>> getPetActivity(
+            @Header("Authorization") String authToken,
+            @Path("userID") int userId);
 }

@@ -1,26 +1,51 @@
 package unique;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PetActivity {
     // VARIABLES
-    private boolean inOrOut;
-    private String time, date, pet;
+    @SerializedName("in_or_out")
+    private int inOrOut;
+    private String time;
+    private String date;
+    private String pet;
+    @SerializedName("collar_tag")
+    private String collar_tag;
+    @SerializedName("created_at")
+    private String created_at;
 
 
     // CONSTRUCTOR
-    public PetActivity(boolean inOrOut, String time, String date, String pet) {
+    public PetActivity(int inOrOut, String created_at, String collar_tag) {
         this.inOrOut = inOrOut;
-        this.time = time;
-        this.date = date;
-        this.pet = pet;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date dateTime = sdf.parse(created_at);
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+
+            this.date = sdfDate.format(dateTime);
+            this.time = sdfTime.format(dateTime);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.collar_tag = collar_tag;
     }
 
 
     // GETTERS AND SETTERS
-    public boolean isInOrOut() {
+    public int isInOrOut() {
         return inOrOut;
     }
 
-    public void setInside(boolean outside) {
+    public void setInside(int outside) {
         inOrOut = inOrOut;
     }
 
@@ -46,5 +71,34 @@ public class PetActivity {
 
     public void setPet(String pet) {
         this.pet = pet;
+    }
+
+    public String getCollar_tag() {
+        return collar_tag;
+    }
+
+    public void setCollar_tag(String collar_tag) {
+        this.collar_tag = collar_tag;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "PetActivity{" +
+                "inOrOut=" + inOrOut +
+                ", time='" + time + '\'' +
+                ", date='" + date + '\'' +
+                ", pet='" + pet + '\'' +
+                ", collar_tag='" + collar_tag + '\'' +
+                ", created_at='" + created_at + '\'' +
+                '}';
     }
 }

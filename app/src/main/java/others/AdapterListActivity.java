@@ -10,26 +10,35 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sesameapplication.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import unique.Pet;
 import unique.PetActivity;
 
 public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivity.ViewHolder>{
+
+    // VARIABLES
     TextView tvInOrOut, tvDate, tvTime;
     ImageView ivPet;
-
     public interface InterfacePetActivity {
         public void clickManager(int position, PetActivity petActivity);
     }
     InterfacePetActivity interfacePetActivity;
     List<PetActivity> listPetActivity;
+    List<Pet> listPet;
 
-    public AdapterListActivity(List<PetActivity> listPetActivity, InterfacePetActivity interfacePetActivity) {
+
+    // CONSTRUCTOR
+    public AdapterListActivity(List<PetActivity> listPetActivity, InterfacePetActivity interfacePetActivity, List<Pet> listPet) {
         this.listPetActivity = listPetActivity;
         this.interfacePetActivity = interfacePetActivity;
+        this.listPet = listPet;
     }
 
+
+    // METHODS
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,13 +50,20 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        vh.tvInOrOut.setText(listPetActivity.get(position).isInOrOut() ? "Entrée" : "Sortie");
-        vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(listPetActivity.get(position).isInOrOut() ? R.drawable.drawable_input_circle : R.drawable.drawable_output_circle, 0, 0, 0);
+        if (listPetActivity.get(position).isInOrOut() == 0) {
+            vh.tvInOrOut.setText("Sortie");
+            vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_output_circle, 0, 0, 0);
+        } else {
+            vh.tvInOrOut.setText("Entrée");
+            vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_input_circle, 0, 0, 0);
+        }
         vh.tvDate.setText(listPetActivity.get(position).getDate());
         vh.tvTime.setText(listPetActivity.get(position).getTime());
-        String imgSrc = listPetActivity.get(position).getPet();
-        int imgId = vh.ivPet.getResources().getIdentifier(imgSrc, "mipmap", vh.ivPet.getContext().getPackageName());
-        vh.ivPet.setImageResource(imgId);
+        for (Pet pet : listPet) {
+            if (listPetActivity.get(position).getCollar_tag().equals(pet.getCollar_tag())) {
+                Picasso.get().load(pet.getImg()).into(vh.ivPet);
+            }
+        }
     }
 
     @Override

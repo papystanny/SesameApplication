@@ -22,6 +22,7 @@ import java.util.List;
 import others.AdapterListHomePage;
 import reseau_api.InterfaceServer;
 import reseau_api.RetrofitInstance;
+import reseau_api.SimpleApiResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

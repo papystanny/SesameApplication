@@ -42,6 +42,9 @@
         <action
             android:id="@+id/fromSettingsToLogin"
             app:destination="@id/fragment_login" />
+        <action
+            android:id="@+id/action_fragment_settings_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_email_recup"
@@ -78,6 +81,10 @@
         android:id="@+id/petActivityFragment2"
         android:name="com.example.sesameapplication.PetActivityFragment"
         android:label="PetActivityFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.sesameapplication.ProfileFragment"
+        android:label="ProfileFragment" />
 
 
 </navigation>
