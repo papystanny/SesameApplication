@@ -120,20 +120,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/custom_input"
         app:cardBackgroundColor="@color/orange"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
         app:contentPaddingLeft="10dp"
         app:contentPaddingRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btCardGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputMdp">
+        app:layout_constraintTop_toBottomOf="@+id/tvMdpForgot">
 
         <Button
             android:id="@+id/btLogin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/orange"
             android:drawablePadding="10dp"
@@ -161,8 +161,10 @@
         app:contentPaddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCardLogin">
+        app:layout_constraintTop_toBottomOf="@+id/btCardLogin"
+        app:layout_constraintVertical_bias="0.288">
 
         <Button
             android:id="@+id/btGoogle"
@@ -186,6 +188,7 @@
         android:id="@+id/layoutSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
