@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp" /> <!-- Modifier la valeur de radius pour ajuster l'arrondi -->
+    <solid android:color="@android:color/transparent" /> <!-- Utilisez une couleur transparente -->
+</shape>

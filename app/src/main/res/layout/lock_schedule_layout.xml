@@ -179,9 +179,10 @@
                         android:textAlignment="center"
                         android:textSize="34sp" />
                 </LinearLayout>
+
                 <Switch
                     android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="134dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:checked="false"
@@ -192,9 +193,9 @@
                     android:showText="false"
                     android:textOff=""
                     android:textOn=""
-                    android:translationX="-40dp"
                     android:thumbTint="@drawable/switch_thumb_selector"
                     android:trackTint="@drawable/switch_track_selector"
+                    android:translationX="-40dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             </LinearLayout>

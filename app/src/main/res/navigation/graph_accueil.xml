@@ -73,11 +73,19 @@
     <fragment
         android:id="@+id/petsFragment3"
         android:name="com.example.sesameapplication.PetsFragment"
-        android:label="PetsFragment" />
+        android:label="PetsFragment" >
+        <action
+            android:id="@+id/fromPetsRecupToAddPets"
+            app:destination="@id/addPetsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/petActivityFragment2"
         android:name="com.example.sesameapplication.PetActivityFragment"
         android:label="PetActivityFragment" />
+    <fragment
+        android:id="@+id/addPetsFragment"
+        android:name="com.example.sesameapplication.AddPetsFragment"
+        android:label="AddPetsFragment" />
 
 
 </navigation>

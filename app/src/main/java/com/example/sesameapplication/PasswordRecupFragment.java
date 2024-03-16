@@ -2,6 +2,7 @@ package com.example.sesameapplication;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,6 +28,8 @@ public class PasswordRecupFragment extends Fragment {
     private EditText etPasswordConfirm;
     private Button btChangePassword;
     private String userEmail;
+    View dividerMdpConfirm;
+    View dividerMdp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +39,8 @@ public class PasswordRecupFragment extends Fragment {
         etPassword = view.findViewById(R.id.etMdp);
         etPasswordConfirm = view.findViewById(R.id.etMdpConfirm);
         btChangePassword = view.findViewById(R.id.btLogin);
+        dividerMdpConfirm = view.findViewById(R.id.dividerMdpConfrim);
+        dividerMdp = view.findViewById(R.id.dividerMdp);
 
         if (getArguments() != null && getArguments().containsKey("email")) {
             userEmail = getArguments().getString("email");
@@ -43,6 +48,32 @@ public class PasswordRecupFragment extends Fragment {
         else{
             Toast.makeText(getContext(), "la faute est ici", Toast.LENGTH_SHORT).show();
         }
+
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerMdp.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerMdp.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+
+        etPasswordConfirm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerMdpConfirm.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerMdpConfirm.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
 
         btChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override

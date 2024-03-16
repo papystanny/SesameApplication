@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,6 +30,7 @@ import unique.User;
 public class EmailRecupFragment extends Fragment {
 
     private EditText etEmail;
+    View dividerEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +38,22 @@ public class EmailRecupFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_email_recup, container, false);
 
         etEmail = view.findViewById(R.id.etEmail);
+        dividerEmail = view.findViewById(R.id.dividerEmail);
         Button btSendResetCode = view.findViewById(R.id.btLogin);
+
+        //g1ng3r
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
 
         btSendResetCode.setOnClickListener(new View.OnClickListener() {
             @Override

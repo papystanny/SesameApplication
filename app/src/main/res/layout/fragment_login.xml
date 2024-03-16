@@ -50,16 +50,15 @@
             android:hint="Courriel"
             android:inputType="text"
             android:padding="10dp"
-            android:text="alice.smith@example.com"
             android:textAlignment="gravity"
             android:textColorHint="@color/black" />
 
         <View
             android:id="@+id/dividerEmail"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="3dp"
             android:layout_marginHorizontal="30dp"
-            android:background="@color/orange"
+            android:background="@color/lightGray"
             android:translationY="38dp" />
     </androidx.cardview.widget.CardView>
 
@@ -87,9 +86,8 @@
             android:ems="10"
             android:fontFamily="@font/poppins"
             android:hint="Mot de passe"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:padding="10dp"
-            android:text="password"
             android:textAlignment="gravity"
             android:textColorHint="@color/black" />
 

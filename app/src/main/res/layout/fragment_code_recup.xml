@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="30dp"
-            android:background="@color/orange"
+            android:background="@color/lightGray"
             android:translationY="38dp" />
     </androidx.cardview.widget.CardView>
 
