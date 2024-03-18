@@ -1,64 +1,88 @@
 package com.example.sesameapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LockScheduleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class LockScheduleFragment extends Fragment {
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import others.AdapterListSchedule;
+import reseau_api.InterfaceServer;
+import reseau_api.RetrofitInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import unique.LockSchedule;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+public class LockScheduleFragment extends Fragment implements AdapterListSchedule.InterfaceSchedule {
+    RecyclerView rvSchedule;
+    AdapterListSchedule adapterListSchedule;
+    List<LockSchedule> listSchedule = new ArrayList<>();
     public LockScheduleFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LockScheduleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LockScheduleFragment newInstance(String param1, String param2) {
-        LockScheduleFragment fragment = new LockScheduleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lock_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_lock_schedule, container, false);
+
+        if (listSchedule.size() > 0) {
+            listSchedule.clear();
+        }
+        getLockSchedules();
+        rvSchedule = view.findViewById(R.id.rvSchedule);
+        rvSchedule.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterListSchedule = new AdapterListSchedule(listSchedule, this);
+        rvSchedule.setAdapter(adapterListSchedule);
+
+        return view;
+    }
+
+    private void getLockSchedules() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", getActivity().MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        String authToken = "Bearer " + token;
+        int id = sharedPreferences.getInt("id", 0);
+
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<List<LockSchedule>> call = interfaceServer.getLockSchedules(authToken, id);
+
+        call.enqueue(new Callback<List<LockSchedule>>() {
+            @Override
+            public void onResponse(Call<List<LockSchedule>> call, Response<List<LockSchedule>> response) {
+                if (response.isSuccessful()) {
+                    for (LockSchedule lockSchedule : response.body()) {
+                        String dayOfWeek = lockSchedule.getDayOfWeek();
+                        String openTime = lockSchedule.getOpenTime();
+                        String closeTime = lockSchedule.getCloseTime();
+                        int recurring = lockSchedule.getRecurring();
+                        listSchedule.add(new LockSchedule(dayOfWeek, openTime, closeTime, recurring));
+                        adapterListSchedule.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LockSchedule>> call, Throwable t) {
+                Log.d("LockSchedule", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void clickManager(int position) {
+        Log.d("LockSchedule", "clickManager: " + position);
     }
 }

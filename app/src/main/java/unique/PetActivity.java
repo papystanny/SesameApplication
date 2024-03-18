@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PetActivity {
     // VARIABLES
@@ -18,27 +22,83 @@ public class PetActivity {
     private String collar_tag;
     @SerializedName("created_at")
     private String created_at;
+    private String totalActivity;
+    private List<TimePeriod> outsidePeriods;
 
 
     // CONSTRUCTOR
     public PetActivity(int inOrOut, String created_at, String collar_tag) {
-        this.inOrOut = inOrOut;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Date dateTime = sdf.parse(created_at);
-            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+           this.inOrOut = inOrOut;
+            this.created_at = created_at;
+            this.collar_tag = collar_tag;
+            this.outsidePeriods = new ArrayList<>();
 
-            this.date = sdfDate.format(dateTime);
-            this.time = sdfTime.format(dateTime);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        this.collar_tag = collar_tag;
+            calculateTotalActivity();
     }
 
+    // METHODS
+    private String validateTime(String time) {
+        // Check if time contains seconds
+        if (time.matches("(\\d{2}:\\d{2}:\\d{2})")) {
+            // Remove seconds
+            return time.substring(0, 5); // Take only hours and minutes
+        }
+        return time; // Return unchanged time if seconds are not present
+    }
+
+    private void calculateTotalActivity() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date dateTime = sdf.parse(created_at);
+            String currentTime = sdfTime.format(dateTime);
+            String currentDate = sdfDate.format(dateTime);
+
+            // If the pet is outside, add a new period
+            if (inOrOut == 1) {
+                outsidePeriods.add(new TimePeriod(currentTime, null));
+            } else {
+                // If the pet is inside, update the end time of the last period
+                if (!outsidePeriods.isEmpty()) {
+                    outsidePeriods.get(outsidePeriods.size() - 1).setEndTime(currentTime);
+                }
+            }
+
+            // Calculate total time outside
+            long totalHours = 0;
+            long totalMinutes = 0;
+            for (TimePeriod period : outsidePeriods) {
+                if (period.getEndTime() != null) {
+                    LocalTime start = LocalTime.parse(period.getStartTime());
+                    LocalTime end = LocalTime.parse(period.getEndTime());
+
+                    long durationHours = end.getHour() - start.getHour();
+                    long durationMinutes = end.getMinute() - start.getMinute();
+
+                    // Handle negative minutes
+                    if (durationMinutes < 0) {
+                        durationHours--;
+                        durationMinutes += 60;
+                    }
+
+                    totalHours += durationHours;
+                    totalMinutes += durationMinutes;
+                }
+            }
+
+            // Adjust minutes to hours if necessary
+            totalHours += totalMinutes / 60;
+            totalMinutes %= 60;
+
+            this.totalActivity = String.format("%d heures et %d minutes", totalHours, totalMinutes);
+            this.date = currentDate;
+            this.time = validateTime(currentTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     // GETTERS AND SETTERS
     public int isInOrOut() {
@@ -89,6 +149,14 @@ public class PetActivity {
         this.created_at = created_at;
     }
 
+    public String getTotalActivity() {
+        return totalActivity;
+    }
+
+    public void setTotalActivity(String totalActivity) {
+        this.totalActivity = totalActivity;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -100,5 +168,28 @@ public class PetActivity {
                 ", collar_tag='" + collar_tag + '\'' +
                 ", created_at='" + created_at + '\'' +
                 '}';
+    }
+
+    // Inner class to represent a time period
+    private static class TimePeriod {
+        private String startTime;
+        private String endTime;
+
+        public TimePeriod(String startTime, String endTime) {
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
+
+        public String getStartTime() {
+            return startTime;
+        }
+
+        public String getEndTime() {
+            return endTime;
+        }
+
+        public void setEndTime(String endTime) {
+            this.endTime = endTime;
+        }
     }
 }

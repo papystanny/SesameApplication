@@ -33,7 +33,11 @@
         android:id="@+id/fragment_home"
         android:name="com.example.sesameapplication.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragment_home_to_lockScheduleFragment"
+            app:destination="@id/lockScheduleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_settings"
         android:name="com.example.sesameapplication.SettingsFragment"
@@ -85,6 +89,10 @@
         android:id="@+id/profileFragment"
         android:name="com.example.sesameapplication.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/lockScheduleFragment"
+        android:name="com.example.sesameapplication.LockScheduleFragment"
+        android:label="LockScheduleFragment" />
 
 
 </navigation>

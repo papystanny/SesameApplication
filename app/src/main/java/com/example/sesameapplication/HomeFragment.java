@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
 
     View view;
     RecyclerView rvHomePage;
-    ImageView ibHomeLock;
+    ImageView ibHomeLock, ibSchedule;
     TextView tvMsg;
     AdapterListHomePage.InterfacePet interfacePet;
     AdapterListHomePage adapterListHomePage;
@@ -45,15 +47,13 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        interfacePet = this;
-
         if (listPet.size() > 0) {
             listPet.clear();
         }
         getPets();
         rvHomePage = view.findViewById(R.id.rvHomePage);
         rvHomePage.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterListHomePage = new AdapterListHomePage(listPet, interfacePet);
+        adapterListHomePage = new AdapterListHomePage(listPet, this);
         rvHomePage.setAdapter(adapterListHomePage);
 
         // Appeler la méthode pour afficher les SharedPreferences
@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
 
         // Récupération des éléments de la vue
         ibHomeLock = view.findViewById(R.id.ibHomeLock);
+        ibSchedule = view.findViewById(R.id.ibSchedule);
         tvMsg = view.findViewById(R.id.tvMsg);
         ibHomeLock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +75,14 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
                     tvMsg.setText("La porte est déverrouillée");
                 }
                 isLocked = !isLocked;
+            }
+        });
+
+        ibSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.action_fragment_home_to_lockScheduleFragment );
             }
         });
 

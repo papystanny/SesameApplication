@@ -11,6 +11,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import unique.LockSchedule;
 import unique.LoginResponse;
 import unique.Pet;
 import unique.PetActivity;
@@ -52,13 +53,18 @@ public interface InterfaceServer {
                                  @Field("email") String email,
                                  @Field("password") String password);
 
-    @GET("api/pets/{id}")
+    @GET("api/pets/user/{id}")
     Call<List<Pet>> getPetsByUser(
             @Header("Authorization") String authToken,
             @Path("id") int userId);
 
     @GET("api/activity/{userID}")
     Call<List<PetActivity>> getPetActivity(
+            @Header("Authorization") String authToken,
+            @Path("userID") int userId);
+
+    @GET("api/lock_schedules/{userID}")
+    Call<List<LockSchedule>> getLockSchedules(
             @Header("Authorization") String authToken,
             @Path("userID") int userId);
 }

@@ -1,5 +1,7 @@
 package com.example.sesameapplication;
 
+import static com.example.sesameapplication.PetActivityFragment.listPetActivity;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -23,6 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import unique.Pet;
+import unique.PetActivity;
 
 
 public class PetsFragment extends Fragment implements AdapterListPet.InterfacePet {
@@ -30,6 +33,7 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
     RecyclerView rvPets;
     AdapterListPet adapterListPet;
     List<Pet> listPet = new ArrayList<>();
+    List<PetActivity> listPetActivity = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,10 +45,11 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
             listPet.clear();
         }
         getPets();
+        getPetActivity();
         rvPets = view.findViewById(R.id.rvPets);
         rvPets.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvPets.setHasFixedSize(true);
-        adapterListPet = new AdapterListPet(listPet, this);
+        adapterListPet = new AdapterListPet(listPet, this, listPetActivity);
         rvPets.setAdapter(adapterListPet);
 
         return view;
@@ -79,6 +84,36 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
 
             @Override
             public void onFailure(Call<List<Pet>> call, Throwable t) {
+                // Afficher un message d'erreur
+            }
+        });
+    }
+
+    private void getPetActivity() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", getContext().MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        String authToken = "Bearer " + token; // Formatage du token
+        int userId = sharedPreferences.getInt("id", 0);
+
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<List<PetActivity>> call = interfaceServer.getPetActivity(authToken, userId);
+
+        call.enqueue(new Callback<List<PetActivity>>() {
+            @Override
+            public void onResponse(Call<List<PetActivity>> call, Response<List<PetActivity>> response) {
+                if (response.isSuccessful()) {
+                    for (PetActivity petActivity : response.body()) {
+                        int inOrOut = petActivity.isInOrOut();
+                        String created_at = petActivity.getCreated_at();
+                        String collar_tag = petActivity.getCollar_tag();
+                        listPetActivity.add(new PetActivity(inOrOut, created_at, collar_tag));
+                        adapterListPet.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PetActivity>> call, Throwable t) {
                 // Afficher un message d'erreur
             }
         });
