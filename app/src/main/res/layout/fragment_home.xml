@@ -16,7 +16,6 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/custom_rounded_corner"
         android:contentDescription="Open schedule"
-        android:onClick="replaceFragment"
         android:src="@drawable/drawable_schedule"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

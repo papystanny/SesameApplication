@@ -7,6 +7,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import unique.LoginResponse;
+import unique.Pet;
 import unique.User;
 
 public interface InterfaceServer {
@@ -45,4 +46,11 @@ public interface InterfaceServer {
                                  @Field("email") String email,
                                  @Field("password") String password);
 
+
+    @POST("api/pets")
+    Call<Pet> addPet(@Header("Authorization") String authToken,
+                    @Field("name") String name,
+                    @Field("nickname") String nickname,
+                    @Field("img") String img,
+                    @Field("type") String type);
 }

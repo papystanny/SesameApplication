@@ -1,29 +1,36 @@
 package unique;
 
-public class Pet {
+import com.google.gson.annotations.SerializedName;
 
+public class Pet {
+    @SerializedName("name")
     String name;
+    @SerializedName("nickname")
     String nickname;
+    @SerializedName("type")
     String type;
+    @SerializedName("img")
     String img;
+    @SerializedName("collar_tag")
     String collar_tag;
-    Boolean status;
+    @SerializedName("is_outside")
+    Boolean is_outside;
 
     public Boolean getStatus() {
-        return status;
+        return is_outside;
     }
 
     public void setStatus(Boolean status) {
-        this.status = status;
+        this.is_outside = status;
     }
 
-    public Pet(String name, String nickname, String type, String img, String collar_tag, Boolean status) {
+    public Pet(String name, String nickname, String type, String img, String collar_tag, Boolean is_outside) {
         this.name = name;
         this.nickname = nickname;
         this.type = type;
         this.img = img;
         this.collar_tag = collar_tag;
-        this.status = status;
+        this.is_outside = is_outside;
     }
 
     public String getName() {

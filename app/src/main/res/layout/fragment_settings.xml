@@ -50,7 +50,6 @@
             android:drawableLeft="@drawable/drawable_profil"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
-            android:onClick="replaceFragment"
             android:text="Profil et préférences"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
