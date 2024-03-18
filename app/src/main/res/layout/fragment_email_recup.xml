@@ -93,7 +93,7 @@
             android:id="@+id/btLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/orange"
+            android:background="@drawable/custom_no_border"
             android:fontFamily="@font/poppins"
             android:text="@string/SendBtn"
             android:textAllCaps="false"

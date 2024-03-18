@@ -41,7 +41,9 @@ public class PetActivity {
         // Check if time contains seconds
         if (time.matches("(\\d{2}:\\d{2}:\\d{2})")) {
             // Remove seconds
-            return time.substring(0, 5); // Take only hours and minutes
+            String cut = time.substring(0, 5); // Take only hours and minutes
+            String finalTime = cut.replace(":", "h"); // Replace ':' with 'h'
+            return finalTime;
         }
         return time; // Return unchanged time if seconds are not present
     }

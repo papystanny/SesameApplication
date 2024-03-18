@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ import retrofit2.Response;
 import unique.LockSchedule;
 
 public class LockScheduleFragment extends Fragment implements AdapterListSchedule.InterfaceSchedule {
+    ImageButton ibAddSchedule;
     RecyclerView rvSchedule;
     AdapterListSchedule adapterListSchedule;
     List<LockSchedule> listSchedule = new ArrayList<>();
@@ -46,6 +50,15 @@ public class LockScheduleFragment extends Fragment implements AdapterListSchedul
         rvSchedule.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterListSchedule = new AdapterListSchedule(listSchedule, this);
         rvSchedule.setAdapter(adapterListSchedule);
+
+        ibAddSchedule = view.findViewById(R.id.ibAddSchedule);
+        ibAddSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.action_lockScheduleFragment_to_createScheduleFragment);
+            }
+        });
 
         return view;
     }

@@ -3,6 +3,7 @@ package others;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -120,6 +121,14 @@ public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedul
         } else {
             vh.switch1.setChecked(true);
         }
+
+        // Handle switch state change listener
+        vh.switch1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vh.switch1.setChecked(!vh.switch1.isChecked());
+            }
+        });
     }
 
     @Override

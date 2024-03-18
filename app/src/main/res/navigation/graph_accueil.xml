@@ -92,7 +92,15 @@
     <fragment
         android:id="@+id/lockScheduleFragment"
         android:name="com.example.sesameapplication.LockScheduleFragment"
-        android:label="LockScheduleFragment" />
+        android:label="LockScheduleFragment" >
+        <action
+            android:id="@+id/action_lockScheduleFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createScheduleFragment"
+        android:name="com.example.sesameapplication.CreateScheduleFragment"
+        android:label="CreateScheduleFragment" />
 
 
 </navigation>

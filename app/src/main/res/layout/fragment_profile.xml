@@ -176,7 +176,7 @@
             android:id="@+id/btChangePassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/orange"
+            android:background="@drawable/custom_no_border"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
             android:text="Changer"

@@ -59,12 +59,12 @@
         android:layout_height="wrap_content"
 
 
+        android:layout_marginTop="20dp"
+
         android:orientation="vertical"
 
         app:layout_constraintBottom_toTopOf="@+id/llTime"
-
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:layout_constraintVertical_bias="0.9">
@@ -100,7 +100,7 @@
 
             app:cardCornerRadius="15dp"
 
-            app:cardElevation="15dp"
+            app:cardElevation="10dp"
 
             app:layout_constraintBottom_toTopOf="@+id/inputPhone"
 
@@ -444,7 +444,7 @@
                 android:layout_marginBottom="25dp"
                 app:cardBackgroundColor="@color/gray"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="10dp">
+                app:cardElevation="5dp">
 
                 <EditText
 
@@ -515,7 +515,7 @@
                 android:layout_marginBottom="25dp"
                 app:cardBackgroundColor="@color/gray"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="10dp">
+                app:cardElevation="5dp">
 
                 <EditText
 
@@ -571,7 +571,7 @@
         android:background="@drawable/custom_input"
         app:cardBackgroundColor="@color/orange"
         app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
+        app:cardElevation="10dp"
         app:contentPaddingLeft="10dp"
         app:contentPaddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -583,7 +583,7 @@
             android:id="@+id/btAddSchedule"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/orange"
+            android:background="@drawable/custom_no_border"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
             android:text="@string/AddBtn"
