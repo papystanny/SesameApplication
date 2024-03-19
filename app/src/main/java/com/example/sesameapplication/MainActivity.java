@@ -1,6 +1,10 @@
 package com.example.sesameapplication;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -8,14 +12,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import others.AdapterListHomePage;
 import unique.Pet;
@@ -31,11 +38,32 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     NavController navController;
 
+    ActivityResultLauncher<String[]> permissionsLauncher;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        permissionsLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestMultiplePermissions(),
+                new ActivityResultCallback<Map<String, Boolean>>() {
+                    @Override
+                    public void onActivityResult(Map<String, Boolean> result) {
+                        if(result.get(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != null)
+                            if(result.get(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == false) {
+                                if(shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                                    Toast.makeText(MainActivity.this, "Acceptez la permission", Toast.LENGTH_SHORT).show();
+
+                            }
+                    }
+                }
+        );
+
+        verifierPermissions();
+
 
         linearLayout = findViewById(R.id.linearLayout);
 
@@ -67,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
              navController = navHostFragment.getNavController();
         }
 
+        verifierPermissions();
 
         // Listeners pour les boutons de navigation
         biHome.setOnClickListener(view -> { navigateUsingNavController(R.id.fragment_home); resetButtonColor(); biHome.setColorFilter(Color.parseColor("#FF5C00"));});
@@ -88,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void verifierPermissions()
+    {
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            String[] permissions = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            permissionsLauncher.launch(permissions );
+        }
+    }
     // L méthode pour naviguer d'un fragment à un autre créait un problème. le fragment home
     // était toujours là et ne disparaissait jamais alors j'ai enlevé cette méthode pour faire que les fragments s'échange avec le navhost 
 

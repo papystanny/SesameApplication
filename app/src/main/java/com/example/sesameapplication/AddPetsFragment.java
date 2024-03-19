@@ -3,15 +3,21 @@ package com.example.sesameapplication;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,8 +40,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import reseau_api.InterfaceServer;
 import reseau_api.RetrofitInstance;
 import reseau_api.SimpleApiResponse;
@@ -54,10 +64,17 @@ public class AddPetsFragment extends Fragment {
     ArrayAdapter<String> adapterItems;
 
     ImageButton UploadBtn;
+    ActivityResultLauncher<PickVisualMediaRequest> picker;
+
+    ActivityResultLauncher<Intent> photoLauncher;
+
     AutoCompleteTextView auto_complete_txt;
 
+    File fichier;
+
     Button btCreatePet;
-    private final int GALLERY_REQ_CODE = 1000;
+    Uri imageUri;
+    //private final int GALLERY_REQ_CODE = 1000;
     EditText etFirstName,etNickname;
 
     ActivityResultLauncher<String> pickphotoLauncher;
@@ -76,10 +93,41 @@ public class AddPetsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        pickphotoLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+
+        picker = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(),
                 new ActivityResultCallback<Uri>() {
                     @Override
-                    public void onActivityResult(Uri result) {
+                    public void onActivityResult(Uri o) {
+                        UploadBtn.setImageURI(o);
+                       // File fichier = new File(o.getPath());
+                    }
+                });
+
+
+        photoLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult o) {
+                        /*Bundle bundle = o.getData().getExtras();
+                        Bitmap bitmap = (Bitmap)bundle.get("data");
+                        ivImage.setImageBitmap(bitmap);
+                        try {
+                            sauvegarderPhoto(bitmap);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }*/
+
+                        UploadBtn.setImageURI(imageUri);
+
+                        String path = null;
+                        String[] projection = { MediaStore.Images.Media.DATA };
+                        Cursor cursor = getActivity().getContentResolver().query(imageUri, projection, null, null, null);
+                        if (cursor.moveToFirst()) {
+                            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                            path = cursor.getString(columnIndex);
+                        }
+                        cursor.close();
+                        fichier = new File(path);
 
                     }
                 });
@@ -144,11 +192,11 @@ public class AddPetsFragment extends Fragment {
                     etNickname.setError("Entrez le Surnom de votre compagnon");
                     valide = false;
                 }
-                if(auto_complete_txt.getText().toString().trim().isEmpty())
+                /*if(auto_complete_txt.getText().toString().trim().isEmpty())
                 {
                     auto_complete_txt.setError("Entrez l'espèce de votre compagnon");
                     valide = false;
-                }
+                }*/
                 if(UploadBtn.getContentDescription().toString().isEmpty())
                 {
                     imageError.setVisibility(View.VISIBLE);
@@ -169,30 +217,23 @@ public class AddPetsFragment extends Fragment {
         UploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                verifierPermission();
-                Intent UploadBtn = new Intent(Intent.ACTION_PICK);
-                UploadBtn.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(UploadBtn,GALLERY_REQ_CODE);
+                //verifierPermission();
+              //  Intent UploadBtn = new Intent(Intent.ACTION_PICK);
+             //   UploadBtn.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+             //   startActivityForResult(UploadBtn,GALLERY_REQ_CODE);
                 //pickphotoLauncher.launch("image/*");
+
+
+                /*picker.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
+                        .build());*/
+                takePicture();
             }
         });
 
 
 
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK){
-            if(requestCode==GALLERY_REQ_CODE)
-            {
-                UploadBtn.setImageURI(data.getData());
-            }
-
-        }
     }
 
     public void verifierPermission()
@@ -203,19 +244,29 @@ public class AddPetsFragment extends Fragment {
     }
 
 
-
     private void addPet(String name, String nickName, String img, String type)
     {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
         String authToken = "Bearer " + token; // Formatage du token
 
-        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
-        Call<Pet> call = interfaceServer.addPet(authToken, name, nickName, img, type); // Utilisation du token d'authentification
+        RequestBody nom = RequestBody.create(MediaType.parse("text/plain"), name);
+        RequestBody surnom = RequestBody.create(MediaType.parse("text/plain"), nickName);
+        RequestBody espece = RequestBody.create(MediaType.parse("text/plain"), type);
 
-        call.enqueue(new Callback<Pet>() {
+        MediaType mediaType = MediaType.parse("image/*");
+        RequestBody fichier_requete = RequestBody.create(mediaType,fichier);
+
+        MultipartBody.Part part_fichier = MultipartBody.Part.createFormData("fichier",
+                fichier.getName(),
+                fichier_requete);
+
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<SimpleApiResponse> call = interfaceServer.addPet(authToken, nom, surnom, part_fichier, espece); // Utilisation du token d'authentification
+
+        call.enqueue(new Callback<SimpleApiResponse>() {
             @Override
-            public void onResponse(Call<Pet> call, Response<Pet> response) {
+            public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
                 if (response.isSuccessful()) {
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                     //navController.navigate(R.id.);
@@ -228,9 +279,37 @@ public class AddPetsFragment extends Fragment {
 
 
             @Override
-            public void onFailure(Call<Pet> call, Throwable t) {
+            public void onFailure(Call<SimpleApiResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Opération échoue -404", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    public void takePicture()
+    {
+        try {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Uri uri ;
+            ContentResolver resolver = getActivity().getContentResolver();
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                uri = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+            else
+                uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+            ContentValues values = new ContentValues();
+
+            values.put(MediaStore.Images.Media.DISPLAY_NAME, System.currentTimeMillis() + "_IMG.jpg");
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+
+            imageUri = resolver.insert(uri, values);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            photoLauncher.launch(intent);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
