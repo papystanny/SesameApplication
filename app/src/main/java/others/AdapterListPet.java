@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sesameapplication.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.List;
 
 import unique.Pet;
@@ -62,6 +63,7 @@ public class AdapterListPet extends RecyclerView.Adapter<AdapterListPet.ViewHold
         }
         Picasso.get().load(listPet.get(position).getImg()).into(vh.ivPet);
 
+        Collections.reverse(listPetActivity);
         for (PetActivity petActivity : listPetActivity) {
             if (petActivity.getCollar_tag().equals(listPet.get(position).getCollar_tag()) && petActivity.isInOrOut() == 1) {
                 vh.tvLastActivity.setText("Dernière sortie : " + petActivity.getTime());

@@ -37,6 +37,12 @@
         <action
             android:id="@+id/action_fragment_home_to_lockScheduleFragment"
             app:destination="@id/lockScheduleFragment" />
+        <action
+            android:id="@+id/action_fragment_home_to_petsFragment3"
+            app:destination="@id/petsFragment3" />
+        <action
+            android:id="@+id/action_fragment_home_to_petActivityFragment2"
+            app:destination="@id/petActivityFragment2" />
     </fragment>
     <fragment
         android:id="@+id/fragment_settings"
@@ -80,7 +86,11 @@
     <fragment
         android:id="@+id/petsFragment3"
         android:name="com.example.sesameapplication.PetsFragment"
-        android:label="PetsFragment" />
+        android:label="PetsFragment" >
+        <action
+            android:id="@+id/action_petsFragment3_to_addPetsFragment"
+            app:destination="@id/addPetsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/petActivityFragment2"
         android:name="com.example.sesameapplication.PetActivityFragment"
@@ -101,6 +111,10 @@
         android:id="@+id/createScheduleFragment"
         android:name="com.example.sesameapplication.CreateScheduleFragment"
         android:label="CreateScheduleFragment" />
+    <fragment
+        android:id="@+id/addPetsFragment"
+        android:name="com.example.sesameapplication.AddPetsFragment"
+        android:label="AddPetsFragment" />
 
 
 </navigation>

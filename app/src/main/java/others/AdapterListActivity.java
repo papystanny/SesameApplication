@@ -50,7 +50,7 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        if (listPetActivity.get(position).isInOrOut() == 0) {
+        if (listPetActivity.get(position).isInOrOut() == 1) {
             vh.tvInOrOut.setText("Sortie");
             vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_output_circle, 0, 0, 0);
         } else {

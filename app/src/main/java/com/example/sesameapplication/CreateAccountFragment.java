@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -30,6 +31,7 @@ import unique.User;
 public class CreateAccountFragment extends Fragment {
     private EditText etFirstName, etLastName, etEmail, etPhone, etPassword;
     private Button btRegister;
+    private View dividerFirstName, dividerLastName, dividerEmail, dividerPhone, dividerPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +42,73 @@ public class CreateAccountFragment extends Fragment {
         etPhone = view.findViewById(R.id.etPhone);
         etPassword = view.findViewById(R.id.etMdp);
         btRegister = view.findViewById(R.id.btRegister);
+        dividerFirstName = view.findViewById(R.id.dividerFirstName);
+        dividerLastName = view.findViewById(R.id.dividerLastName);
+        dividerEmail = view.findViewById(R.id.dividerEmail);
+        dividerPhone = view.findViewById(R.id.dividerPhone);
+        dividerPassword = view.findViewById(R.id.dividerMdp);
+
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerPassword.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerPassword.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+        etPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerPhone.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerPhone.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+        etFirstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerFirstName.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerFirstName.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+        etLastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerLastName.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerLastName.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
 
         btRegister.setOnClickListener(v -> attemptRegister());
         return view;

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -25,7 +27,7 @@ public class CodeRecupFragment extends Fragment {
     private EditText etCode;
     private Button btVerify;
     private String userEmail;
-
+    private View dividerEmail;
     private String testE ="test";
 
     @Override
@@ -34,10 +36,24 @@ public class CodeRecupFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_code_recup, container, false);
         etCode = view.findViewById(R.id.etEmail); // Assurez-vous que cet ID correspond à votre EditText pour le code
         btVerify = view.findViewById(R.id.btLogin); // Assurez-vous que cet ID correspond à votre Button
+        dividerEmail = view.findViewById(R.id.dividerEmail);
 
         if (getArguments() != null && getArguments().containsKey("userEmail")) {
             userEmail = getArguments().getString("userEmail");
         }
+
+        etCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
 
         btVerify.setOnClickListener(new View.OnClickListener() {
             @Override

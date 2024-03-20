@@ -1,13 +1,17 @@
 package unique;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -69,30 +73,19 @@ public class PetActivity {
             }
 
             // Calculate total time outside
-            long totalHours = 0;
-            long totalMinutes = 0;
+            long totalSeconds = 0;
             for (TimePeriod period : outsidePeriods) {
                 if (period.getEndTime() != null) {
                     LocalTime start = LocalTime.parse(period.getStartTime());
                     LocalTime end = LocalTime.parse(period.getEndTime());
-
-                    long durationHours = end.getHour() - start.getHour();
-                    long durationMinutes = end.getMinute() - start.getMinute();
-
-                    // Handle negative minutes
-                    if (durationMinutes < 0) {
-                        durationHours--;
-                        durationMinutes += 60;
-                    }
-
-                    totalHours += durationHours;
-                    totalMinutes += durationMinutes;
+                    Duration duration = Duration.between(start, end);
+                    totalSeconds += duration.getSeconds();
                 }
             }
 
-            // Adjust minutes to hours if necessary
-            totalHours += totalMinutes / 60;
-            totalMinutes %= 60;
+            // Calculate total hours and minutes from totalSeconds
+            long totalHours = totalSeconds / 3600;
+            long totalMinutes = (totalSeconds % 3600) / 60;
 
             this.totalActivity = String.format("%d heures et %d minutes", totalHours, totalMinutes);
             this.date = currentDate;

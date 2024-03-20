@@ -67,4 +67,11 @@ public interface InterfaceServer {
     Call<List<LockSchedule>> getLockSchedules(
             @Header("Authorization") String authToken,
             @Path("userID") int userId);
+
+    @POST("api/pets")
+    Call<Pet> addPet(@Header("Authorization") String authToken,
+                     @Field("name") String name,
+                     @Field("nickname") String nickname,
+                     @Field("img") String img,
+                     @Field("type") String type);
 }

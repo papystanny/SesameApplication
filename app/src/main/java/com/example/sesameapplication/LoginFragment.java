@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -31,6 +32,7 @@ public class LoginFragment extends Fragment {
     private EditText etEmail, etPassword;
     private Button btLogin ;
     private TextView btRegister, btPasswordForget ;
+    private View dividerEmail, dividerPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,15 +45,44 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        checkLogin();
+        //checkLogin();
 
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etMdp);
         btLogin = view.findViewById(R.id.btLogin);
+        dividerEmail = view.findViewById(R.id.dividerEmail);
+        dividerPassword = view.findViewById(R.id.dividerMdp);
         btRegister = view.findViewById(R.id.tvSignUpLink);
         btPasswordForget = view.findViewById(R.id.tvMdpForgot);
 
         Toast.makeText(getContext(), "J'entre", Toast.LENGTH_SHORT).show();
+
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerEmail.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerPassword.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerPassword.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +180,6 @@ public class LoginFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     Log.d("LoginResponse", "Statut HTTP : " + response.code());
-
                 }
             }
 

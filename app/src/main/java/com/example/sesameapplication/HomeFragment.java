@@ -9,14 +9,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +56,10 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
         }
         getPets();
         rvHomePage = view.findViewById(R.id.rvHomePage);
-        rvHomePage.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvHomePage.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        rvHomePage.setHasFixedSize(true);
+        SnapHelper snapHelper = new GravitySnapHelper(Gravity.START);
+        snapHelper.attachToRecyclerView(rvHomePage);
         adapterListHomePage = new AdapterListHomePage(listPet, this);
         rvHomePage.setAdapter(adapterListHomePage);
 

@@ -46,5 +46,7 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.8.6")
     implementation ("com.squareup.picasso:picasso:2.8")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    // GravitySnapHelper (For pets carousel)
+    implementation("com.github.rubensousa:gravitysnaphelper:2.2.2")
 
 }

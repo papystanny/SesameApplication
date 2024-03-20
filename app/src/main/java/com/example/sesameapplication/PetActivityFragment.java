@@ -77,7 +77,7 @@ public class PetActivityFragment extends Fragment implements AdapterListActivity
                 }
                 else {
                     Toast.makeText(getContext(), "BAD RESPONSE : " + response.errorBody(), Toast.LENGTH_LONG).show();
-                    Log.d("BAD RESPONSE", "BAD RESPONSE : " + response.body());
+                    Log.d("BAD RESPONSE", "BAD RESPONSE : " + response.errorBody());
                 }
             }
 

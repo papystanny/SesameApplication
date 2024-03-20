@@ -6,14 +6,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +37,7 @@ import unique.PetActivity;
 
 public class PetsFragment extends Fragment implements AdapterListPet.InterfacePet {
 
+    ImageButton ibAddPet;
     RecyclerView rvPets;
     AdapterListPet adapterListPet;
     List<Pet> listPet = new ArrayList<>();
@@ -41,6 +49,16 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pets, container, false);
 
+        ibAddPet = view.findViewById(R.id.ibAddPet);
+
+        ibAddPet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.action_petsFragment3_to_addPetsFragment);
+            }
+        });
+
         if (listPet.size() > 0) {
             listPet.clear();
         }
@@ -49,6 +67,8 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
         rvPets = view.findViewById(R.id.rvPets);
         rvPets.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvPets.setHasFixedSize(true);
+        SnapHelper snapHelper = new GravitySnapHelper(Gravity.START);
+        snapHelper.attachToRecyclerView(rvPets);
         adapterListPet = new AdapterListPet(listPet, this, listPetActivity);
         rvPets.setAdapter(adapterListPet);
 

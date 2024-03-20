@@ -1,14 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPetsFragment">
+    android:textAlignment="center"
+    tools:context=".MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tvTitlePetsPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="Compagnon +"
+        android:textColor="@color/orange"
+        android:textColorHighlight="@color/orange"
+        android:textColorHint="@color/orange"
+        android:textColorLink="@color/orange"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
 
-</FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="5dp"
+        android:translationY="-10dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageError"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus">
+
+        <ImageButton
+            android:id="@+id/UploadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="143dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_rounded_corner"
+            android:contentDescription="Upload Pet Image"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/drawable_upload_pet_pic" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/imageError"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:text="Sélectionnez une image pour votre compagnon"
+        android:textColor="@android:color/holo_red_dark"
+        android:translationY="-15dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/inputFirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputNickname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_badge"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Prénom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputNickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputSpecies"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
+
+        <EditText
+            android:id="@+id/etNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_nickname"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Surnom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerNickname"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputSpecies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btCardLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputNickname">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/auto_complete"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/custom_no_border"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/Select"
+            android:textColorHint="@color/black"
+            app:counterOverflowTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:counterTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:counterTextColor="@color/black"
+            app:errorTextAppearance="@style/TextAppearance.AppCompat.Body1"
+
+            app:helperTextTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:helperTextTextColor="@color/black"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:hintTextColor="@color/black"
+            app:placeholderTextColor="@color/black"
+            app:prefixTextColor="@color/black"
+            app:suffixTextColor="@color/black">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_complete_txt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_no_border"
+                android:drawableStart="@drawable/drawable_species"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/poppins"
+                android:inputType="none"
+                android:paddingVertical="5dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black"
+                android:textColorLink="@color/black"
+                android:textSize="18sp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/dividerSpecies"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="45dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btCardLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/custom_input"
+        app:cardBackgroundColor="@color/orange"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputSpecies">
+
+        <Button
+            android:id="@+id/btCreatePet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_no_border"
+            android:fontFamily="@font/poppins"
+            android:text="@string/AddBtn"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

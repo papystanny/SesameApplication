@@ -18,7 +18,6 @@
         android:layout_marginEnd="10dp"
         android:background="#00FFFFFF"
         android:contentDescription="AddPet"
-        android:onClick="replaceFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.github.rubensousa.gravitysnaphelper.GravitySnapRecyclerView
         android:id="@+id/rvPets"
         android:layout_width="409dp"
         android:layout_height="497dp"
