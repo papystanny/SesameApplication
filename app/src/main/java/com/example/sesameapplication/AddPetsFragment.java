@@ -98,8 +98,24 @@ public class AddPetsFragment extends Fragment {
                 new ActivityResultCallback<Uri>() {
                     @Override
                     public void onActivityResult(Uri o) {
-                        UploadBtn.setImageURI(o);
-                       // File fichier = new File(o.getPath());
+
+
+                        if(o != null)
+                        {
+                            UploadBtn.setImageURI(o);
+                            String path = null;
+                            String[] projection = { MediaStore.Images.Media.DATA };
+                            Cursor cursor = getActivity().getContentResolver().query(imageUri, projection, null, null, null);
+                            if (cursor.moveToFirst()) {
+                                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                                path = cursor.getString(columnIndex);
+                            }
+                            cursor.close();
+                            fichier = new File(path);
+                        }
+
+
+
                     }
                 });
 
@@ -108,6 +124,7 @@ public class AddPetsFragment extends Fragment {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult o) {
+
                         /*Bundle bundle = o.getData().getExtras();
                         Bitmap bitmap = (Bitmap)bundle.get("data");
                         ivImage.setImageBitmap(bitmap);
@@ -116,18 +133,22 @@ public class AddPetsFragment extends Fragment {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }*/
+                        if(o.getResultCode() == RESULT_OK)
+                        {
+                            UploadBtn.setImageURI(imageUri);
 
-                        UploadBtn.setImageURI(imageUri);
-
-                        String path = null;
-                        String[] projection = { MediaStore.Images.Media.DATA };
-                        Cursor cursor = getActivity().getContentResolver().query(imageUri, projection, null, null, null);
-                        if (cursor.moveToFirst()) {
-                            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                            path = cursor.getString(columnIndex);
+                            String path = null;
+                            String[] projection = { MediaStore.Images.Media.DATA };
+                            Cursor cursor = getActivity().getContentResolver().query(imageUri, projection, null, null, null);
+                            if (cursor.moveToFirst()) {
+                                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                                path = cursor.getString(columnIndex);
+                            }
+                            cursor.close();
+                            fichier = new File(path);
                         }
-                        cursor.close();
-                        fichier = new File(path);
+
+
 
                     }
                 });
