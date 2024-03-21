@@ -138,36 +138,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auto_complete" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/auto_complete"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputSpecies"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="65dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/gray"
-        android:fontFamily="@font/poppins"
-        android:hint="@string/select"
-        app:counterOverflowTextAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:counterTextAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:errorTextAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:helperTextTextAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:hintTextColor="@color/black"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btCardLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/inputNickname">
 
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_txt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/auto_complete"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/custom_no_border"
             android:fontFamily="@font/poppins"
-            android:inputType="none" />
+            android:hint="@string/Select"
+            android:textColorHint="@color/black"
+            app:counterOverflowTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:counterTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:counterTextColor="@color/black"
+            app:errorTextAppearance="@style/TextAppearance.AppCompat.Body1"
+
+            app:helperTextTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:helperTextTextColor="@color/black"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:hintTextColor="@color/black"
+            app:placeholderTextColor="@color/black"
+            app:prefixTextColor="@color/black"
+            app:suffixTextColor="@color/black">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_complete_txt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_no_border"
+                android:drawableStart="@drawable/drawable_species"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/poppins"
+                android:inputType="none"
+                android:paddingVertical="5dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black"
+                android:textColorLink="@color/black"
+                android:textSize="18sp" />
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/dividerSpecies"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="45dp" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
