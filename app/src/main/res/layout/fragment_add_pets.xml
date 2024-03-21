@@ -79,7 +79,7 @@
             android:textColorHint="@color/black" />
 
         <View
-            android:id="@+id/dividerNickName"
+            android:id="@+id/dividerNickname"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="30dp"
