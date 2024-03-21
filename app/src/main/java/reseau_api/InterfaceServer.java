@@ -58,4 +58,11 @@ public interface InterfaceServer {
                     @Part("nickname") RequestBody nickname,
                     @Part MultipartBody.Part file,
                     @Part("type") RequestBody type);
+
+    @Multipart
+    @POST("api/pets")
+    Call<SimpleApiResponse> modifyPet(@Header("Authorization") String authToken,
+                                       @Part("name") RequestBody name,
+                                       @Part("nickname") RequestBody nickname,
+                                       @Part MultipartBody.Part file);
 }
