@@ -19,7 +19,7 @@
     <string name="CancelBtn">Annuler</string>
     <string name="GoogleBtn">Se connecter avec Google</string>
     <string name="ProfilePage">Mon profil</string>
-    <string name="select">Espèces</string>
+    <string name="Select">Espèces</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
