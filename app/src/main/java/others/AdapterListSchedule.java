@@ -1,25 +1,36 @@
 package others;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sesameapplication.R;
 
 import java.util.List;
 
+import reseau_api.InterfaceServer;
+import reseau_api.RetrofitInstance;
+import reseau_api.SimpleApiResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import unique.LockSchedule;
 
 public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedule.ViewHolder>{
 
     // VARIABLES
-    TextView tvDimanche, tvLundi, tvMardi, tvMercredi, tvJeudi, tvVendredi, tvSamedi, tvStartTime, tvEndTime;
+    TextView tvDotw, tvStartTime, tvEndTime;
     View div1, div2, div3, div4, div5, div6;
     Switch switch1;
     public interface InterfaceSchedule {
@@ -27,11 +38,13 @@ public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedul
     }
     InterfaceSchedule interfaceSchedule;
     List<LockSchedule> listSchedule;
+    Activity activity;
 
     // CONSTRUCTOR
-    public AdapterListSchedule(List<LockSchedule> listSchedule, InterfaceSchedule interfaceSchedule) {
+    public AdapterListSchedule(List<LockSchedule> listSchedule, InterfaceSchedule interfaceSchedule, Activity activity) {
         this.listSchedule = listSchedule;
         this.interfaceSchedule = interfaceSchedule;
+        this.activity = activity;
     }
 
     @NonNull
@@ -45,73 +58,8 @@ public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedul
     @Override
     public void onBindViewHolder(@NonNull AdapterListSchedule.ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        if (!listSchedule.get(position).getDayOfWeek().equals("Sunday")) {
-            vh.tvDimanche.setVisibility(View.GONE);
-            vh.div1.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvDimanche.setText("Dimanche");
-            vh.tvDimanche.setVisibility(View.VISIBLE);
-            vh.div1.setVisibility(View.VISIBLE);
-        }
 
-        if (!listSchedule.get(position).getDayOfWeek().equals("Monday")) {
-            vh.tvLundi.setVisibility(View.GONE);
-            vh.div2.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvLundi.setText("Lundi");
-            vh.tvLundi.setVisibility(View.VISIBLE);
-            vh.div2.setVisibility(View.VISIBLE);
-        }
-
-        if (!listSchedule.get(position).getDayOfWeek().equals("Tuesday")) {
-            vh.tvMardi.setVisibility(View.GONE);
-            vh.div3.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvMardi.setText("Mardi");
-            vh.tvMardi.setVisibility(View.VISIBLE);
-            vh.div3.setVisibility(View.VISIBLE);
-        }
-
-        if (!listSchedule.get(position).getDayOfWeek().equals("Wednesday")) {
-            vh.tvMercredi.setVisibility(View.GONE);
-            vh.div4.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvMercredi.setText("Mercredi");
-            vh.tvMercredi.setVisibility(View.VISIBLE);
-            vh.div4.setVisibility(View.VISIBLE);
-        }
-
-        if (!listSchedule.get(position).getDayOfWeek().equals("Thursday")) {
-            vh.tvJeudi.setVisibility(View.GONE);
-            vh.div5.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvJeudi.setText("Jeudi");
-            vh.tvJeudi.setVisibility(View.VISIBLE);
-            vh.div5.setVisibility(View.VISIBLE);
-        }
-
-        if (!listSchedule.get(position).getDayOfWeek().equals("Friday")) {
-            vh.tvVendredi.setVisibility(View.GONE);
-            vh.div6.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvVendredi.setText("Vendredi");
-            vh.tvVendredi.setVisibility(View.VISIBLE);
-            vh.div6.setVisibility(View.VISIBLE);
-        }
-
-        if (!listSchedule.get(position).getDayOfWeek().equals("Saturday")) {
-            vh.tvSamedi.setVisibility(View.GONE);
-        }
-        else {
-            vh.tvSamedi.setText("Samedi");
-            vh.tvSamedi.setVisibility(View.VISIBLE);
-        }
+        vh.tvDotw.setText(listSchedule.get(position).getDayOfWeek());
 
         vh.tvStartTime.setText(listSchedule.get(position).getCloseTime());
         vh.tvEndTime.setText(listSchedule.get(position).getOpenTime());
@@ -137,18 +85,14 @@ public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedul
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDimanche, tvLundi, tvMardi, tvMercredi, tvJeudi, tvVendredi, tvSamedi, tvStartTime, tvEndTime;
+        TextView tvDotw, tvStartTime, tvEndTime;
         View div1, div2, div3, div4, div5, div6;
         Switch switch1;
+        int position;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvDimanche = itemView.findViewById(R.id.tvDimanche);
-            tvLundi = itemView.findViewById(R.id.tvLundi);
-            tvMardi = itemView.findViewById(R.id.tvMardi);
-            tvMercredi = itemView.findViewById(R.id.tvMercredi);
-            tvJeudi = itemView.findViewById(R.id.tvJeudi);
-            tvVendredi = itemView.findViewById(R.id.tvVendredi);
-            tvSamedi = itemView.findViewById(R.id.tvSamedi);
+            tvDotw = itemView.findViewById(R.id.tvDotw);
             tvStartTime = itemView.findViewById(R.id.tvStartTime);
             tvEndTime = itemView.findViewById(R.id.tvEndTime);
             div1 = itemView.findViewById(R.id.div1);
@@ -158,6 +102,39 @@ public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedul
             div5 = itemView.findViewById(R.id.div5);
             div6 = itemView.findViewById(R.id.div6);
             switch1 = itemView.findViewById(R.id.switch1);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    position = getAdapterPosition();
+                    interfaceSchedule.clickManager(position);
+
+                    SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPrefs", activity.MODE_PRIVATE);
+                    String token = sharedPreferences.getString("token", "");
+                    String authToken = "Bearer " + token;
+
+                    InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+                    Call<SimpleApiResponse> call = interfaceServer.deleteLockSchedule(authToken, listSchedule.get(position).getId());
+
+                    call.enqueue(new Callback<SimpleApiResponse>() {
+                        @Override
+                        public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
+                            if (response.isSuccessful()) {
+                                listSchedule.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, listSchedule.size());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SimpleApiResponse> call, Throwable t) {
+                            Log.d("LockSchedule", "onFailure: " + t.getMessage());
+                        }
+                    });
+
+                    return false;
+                }
+            });
         }
     }
 }

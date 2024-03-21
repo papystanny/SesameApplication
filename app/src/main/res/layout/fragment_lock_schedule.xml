@@ -13,7 +13,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="Créneau de vérouillage"
+        android:text="Créneau de déverouillage"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"

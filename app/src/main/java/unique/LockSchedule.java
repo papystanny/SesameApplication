@@ -11,6 +11,8 @@ import java.util.Date;
 public class LockSchedule {
 
     // VARIABLES
+    @SerializedName("id")
+    private int id;
     @SerializedName("day_of_week")
     private String dayOfWeek;
     @SerializedName("opening_time")
@@ -21,7 +23,8 @@ public class LockSchedule {
     private int recurring;
 
     // CONSTRUCTOR
-    public LockSchedule(String dayOfWeek, String openTime, String closeTime, int recurring) {
+    public LockSchedule(int id, String dayOfWeek, String openTime, String closeTime, int recurring) {
+        this.id = id;
         this.dayOfWeek = dayOfWeek;
         this.openTime = validateTime(openTime);
         this.closeTime = validateTime(closeTime);
@@ -38,6 +41,14 @@ public class LockSchedule {
     }
 
     // GETTERS AND SETTERS
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDayOfWeek() {
         return dayOfWeek;
     }

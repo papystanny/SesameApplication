@@ -3,6 +3,7 @@ package reseau_api;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -74,4 +75,16 @@ public interface InterfaceServer {
                      @Field("nickname") String nickname,
                      @Field("img") String img,
                      @Field("type") String type);
+
+    @POST("api/lock_schedules")
+    @FormUrlEncoded
+    Call<LockSchedule> addLockSchedule(@Header("Authorization") String authToken,
+                                       @Field("day_of_week") String day_of_week,
+                                       @Field("opening_time") String opening_time,
+                                       @Field("closing_time") String closing_time,
+                                       @Field("reccuring") int reccuring);
+
+    @DELETE("api/lock_schedules/{id}")
+    Call<SimpleApiResponse> deleteLockSchedule(@Header("Authorization") String authToken,
+                                               @Path("id") int id);
 }

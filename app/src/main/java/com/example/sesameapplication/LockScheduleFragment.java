@@ -48,7 +48,7 @@ public class LockScheduleFragment extends Fragment implements AdapterListSchedul
         getLockSchedules();
         rvSchedule = view.findViewById(R.id.rvSchedule);
         rvSchedule.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterListSchedule = new AdapterListSchedule(listSchedule, this);
+        adapterListSchedule = new AdapterListSchedule(listSchedule, this, getActivity());
         rvSchedule.setAdapter(adapterListSchedule);
 
         ibAddSchedule = view.findViewById(R.id.ibAddSchedule);
@@ -77,11 +77,12 @@ public class LockScheduleFragment extends Fragment implements AdapterListSchedul
             public void onResponse(Call<List<LockSchedule>> call, Response<List<LockSchedule>> response) {
                 if (response.isSuccessful()) {
                     for (LockSchedule lockSchedule : response.body()) {
+                        int id = lockSchedule.getId();
                         String dayOfWeek = lockSchedule.getDayOfWeek();
                         String openTime = lockSchedule.getOpenTime();
                         String closeTime = lockSchedule.getCloseTime();
                         int recurring = lockSchedule.getRecurring();
-                        listSchedule.add(new LockSchedule(dayOfWeek, openTime, closeTime, recurring));
+                        listSchedule.add(new LockSchedule(id, dayOfWeek, openTime, closeTime, recurring));
                         adapterListSchedule.notifyDataSetChanged();
                     }
                 }

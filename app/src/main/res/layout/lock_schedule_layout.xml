@@ -1,7 +1,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tv"
+    android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
@@ -21,124 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/llDotw"
+
+            <TextView
+                android:id="@+id/tvDotw"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_input"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tvDimanche"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Dim"
-                    android:textAlignment="center" />
-                <View
-                    android:id="@+id/div1"
-                    android:layout_width="15dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/radiobutton_off_background"
-                    android:backgroundTint="@color/black"
-                    android:scaleX="0.4"
-                    android:scaleY="0.3" />
-                <TextView
-                    android:id="@+id/tvLundi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Lun"
-                    android:textAlignment="center" />
-                <View
-                    android:id="@+id/div2"
-                    android:layout_width="15dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/radiobutton_off_background"
-                    android:backgroundTint="@color/black"
-                    android:scaleX="0.4"
-                    android:scaleY="0.3" />
-                <TextView
-                    android:id="@+id/tvMardi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Mar"
-                    android:textAlignment="center" />
-                <View
-                    android:id="@+id/div3"
-                    android:layout_width="15dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/radiobutton_off_background"
-                    android:backgroundTint="@color/black"
-                    android:scaleX="0.4"
-                    android:scaleY="0.3" />
-                <TextView
-                    android:id="@+id/tvMercredi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Mer"
-                    android:textAlignment="center" />
-                <View
-                    android:id="@+id/div4"
-                    android:layout_width="15dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/radiobutton_off_background"
-                    android:backgroundTint="@color/black"
-                    android:scaleX="0.4"
-                    android:scaleY="0.3" />
-                <TextView
-                    android:id="@+id/tvJeudi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Jeu"
-                    android:textAlignment="center" />
-                <View
-                    android:id="@+id/div5"
-                    android:layout_width="15dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/radiobutton_off_background"
-                    android:backgroundTint="@color/black"
-                    android:scaleX="0.4"
-                    android:scaleY="0.3" />
-                <TextView
-                    android:id="@+id/tvVendredi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Ven"
-                    android:textAlignment="center" />
-                <View
-                    android:id="@+id/div6"
-                    android:layout_width="15dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/radiobutton_off_background"
-                    android:backgroundTint="@color/black"
-                    android:scaleX="0.4"
-                    android:scaleY="0.3" />
-                <TextView
-                    android:id="@+id/tvSamedi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins"
-                    android:text="Sam"
-                    android:textAlignment="center" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:text="Journées de la semaine" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
