@@ -51,18 +51,18 @@ public interface InterfaceServer {
                                  @Field("password") String password);
 
 
-    @Multipart
     @POST("api/pets")
-    Call<SimpleApiResponse> addPet(@Header("Authorization") String authToken,
-                    @Part("name") RequestBody name,
-                    @Part("nickname") RequestBody nickname,
-                    @Part MultipartBody.Part file,
-                    @Part("type") RequestBody type);
+    Call<Pet> addPet(@Header("Authorization") String authToken,
+                     @Field("name") String name,
+                     @Field("nickname") String nickname,
+                     @Field("img") String img,
+                     @Field("type") String type);
 
-    @Multipart
+
+
     @POST("api/pets")
-    Call<SimpleApiResponse> modifyPet(@Header("Authorization") String authToken,
-                                       @Part("name") RequestBody name,
-                                       @Part("nickname") RequestBody nickname,
-                                       @Part MultipartBody.Part file);
+    Call<Pet> modifyPet(@Header("Authorization") String authToken,
+                         @Field("name") String name,
+                         @Field("nickname") String nickname,
+                         @Field("img") String img);
 }
