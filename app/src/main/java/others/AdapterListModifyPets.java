@@ -44,8 +44,8 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         Pet pet = list.get(position);
-        String img = pet.getImg();
         String name = pet.getName();
+        String image = pet.getImg();
         vh.tvName.setText(list.get(position).getName());
         Picasso.get().load(list.get(position).getImg()).into(vh.ibPet);
 

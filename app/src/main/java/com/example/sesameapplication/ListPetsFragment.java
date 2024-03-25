@@ -52,7 +52,7 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
 
 
         rvListPet.setHasFixedSize(true);
-        rvListPet.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        rvListPet.setLayoutManager(new GridLayoutManager(getContext(), LinearLayoutManager.VERTICAL));
 
         adapterListModifyPets = new AdapterListModifyPets(listPet, this);
         rvListPet.setAdapter(adapterListModifyPets);

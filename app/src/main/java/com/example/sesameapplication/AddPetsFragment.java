@@ -258,7 +258,7 @@ public class AddPetsFragment extends Fragment {
             public void onResponse(Call<Pet> call, Response<Pet> response) {
                 if (response.isSuccessful()) {
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                    //navController.navigate(R.id.);
+                    navController.navigate(R.id.fromAddPetToHomePage);
                 }
                 else
                 {

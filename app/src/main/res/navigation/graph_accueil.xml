@@ -88,7 +88,11 @@
     <fragment
         android:id="@+id/addPetsFragment"
         android:name="com.example.sesameapplication.AddPetsFragment"
-        android:label="AddPetsFragment" />
+        android:label="AddPetsFragment" >
+        <action
+            android:id="@+id/fromAddPetToHomePage"
+            app:destination="@id/fragment_home" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_listPet"
         android:name="com.example.sesameapplication.ListPetsFragment"
@@ -102,7 +106,11 @@
         android:id="@+id/modifyPetsFragment"
         android:name="com.example.sesameapplication.ModifyPetsFragment"
         android:label="fragment_modify_pets"
-        tools:layout="@layout/fragment_modify_pets" />
+        tools:layout="@layout/fragment_modify_pets" >
+        <action
+            android:id="@+id/fromModifyPetToHomePage"
+            app:destination="@id/fragment_home" />
+    </fragment>
 
 
 </navigation>

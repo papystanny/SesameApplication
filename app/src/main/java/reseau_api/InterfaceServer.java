@@ -13,6 +13,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -67,9 +68,11 @@ public interface InterfaceServer {
 
 
 
-    @POST("api/pets")
+    @Headers("Accept: application/json")
+    @PUT("api/pets/{id}")
     @FormUrlEncoded
     Call<Pet> modifyPet(@Header("Authorization") String authToken,
+                         @Path("id") int petId,
                          @Field("name") String name,
                          @Field("nickname") String nickname,
                          @Field("img") String img);
@@ -78,6 +81,7 @@ public interface InterfaceServer {
     Call<SimpleApiResponse> deletePet(@Header("Authorization") String authToken,
                          @Path("id") int petId);
 
+    @Headers("Accept: application/json")
     @GET("api/pets/user/{id}")
     Call<List<Pet>> getPetsByUser(
             @Header("Authorization") String authToken,
