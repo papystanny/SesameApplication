@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,12 +41,11 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
         if (listPet.size() > 0) {
             listPet.clear();
         }
-        listPet.add(new Pet("Rex", "Rexou", "Chien", "ic_dog", "123456", true));
-        listPet.add(new Pet("Mina", "Minou", "Chat", "ic_dog", "789456", false));
-        Log.d("ListPet", listPet.toString());
+      Log.d("ListPet", listPet.toString());
         rvHomePage = view.findViewById(R.id.rvHomePage);
         rvHomePage.setHasFixedSize(true);
-        rvHomePage.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        //?
+        rvHomePage.setLayoutManager(new GridLayoutManager(getContext(), 2));
         AdapterListHomePage adapterList = new AdapterListHomePage(listPet, this);
         rvHomePage.setAdapter(adapterList);
 

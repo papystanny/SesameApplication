@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="Compagnon +"
+        android:text="Compagnon"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"
@@ -20,23 +20,37 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.411"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.120000005" />
+        app:layout_constraintVertical_bias="0.125" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/poppins"
+        android:text="Ajouter un nouveau compagnon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus" />
 
     <ImageButton
         android:id="@+id/UploadBtn"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/rounded_corner"
         android:contentDescription="Upload Pet Image"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/upload_pet_pic" />
+
     <TextView
         android:id="@+id/imageError"
         android:layout_width="wrap_content"
@@ -92,7 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="65dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="18dp"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
@@ -191,7 +205,8 @@
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/black"
                 android:textColorLink="@color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:contentDescription="DropDownMenuPets"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>

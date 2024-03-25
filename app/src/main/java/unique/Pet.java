@@ -14,23 +14,30 @@ public class Pet {
     @SerializedName("collar_tag")
     String collar_tag;
     @SerializedName("is_outside")
-    Boolean is_outside;
+    int is_outside_int;
 
-    public Boolean getStatus() {
-        return is_outside;
+    boolean is_outside_bool;
+
+    public boolean getStatus() {
+        return is_outside_bool;
     }
 
     public void setStatus(Boolean status) {
-        this.is_outside = status;
+        this.is_outside_bool = status;
     }
 
-    public Pet(String name, String nickname, String type, String img, String collar_tag, Boolean is_outside) {
+    public Pet(String name, String nickname, String type, String img, String collar_tag, int is_outside_int) {
         this.name = name;
         this.nickname = nickname;
         this.type = type;
         this.img = img;
-        this.collar_tag = collar_tag;
-        this.is_outside = is_outside;
+        this.is_outside_int = is_outside_int;
+
+        this.is_outside_bool = is_outside_int == 1;
+    }
+
+    public Pet(String img) {
+        this.img = img;
     }
 
     public String getName() {

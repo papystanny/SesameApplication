@@ -33,6 +33,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.Map;
 
 import reseau_api.InterfaceServer;
@@ -109,6 +111,18 @@ public class ModifyPetsFragment extends Fragment {
         etFirstName = view.findViewById(R.id.etFirstName);
         dividerFirstName = view.findViewById(R.id.dividerFirstName);
         dividerNickname = view.findViewById(R.id.dividerNickname);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String imgPet = bundle.getString("img");
+            Picasso.get().load(imgPet).into(UploadBtn);
+
+            String namePet = bundle.getString("name");
+            etFirstName.setText(namePet);
+
+            String nicknamePet = bundle.getString("nickname");
+            etNickname.setText(nicknamePet);
+        }
 
         etFirstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

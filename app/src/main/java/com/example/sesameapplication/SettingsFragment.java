@@ -11,6 +11,9 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,7 +27,13 @@ import retrofit2.Response;
 
 public class SettingsFragment extends Fragment {
 
-    private Button logoutButton;
+    private Button logoutButton, bMyPetsSetting;
+
+    String [] language = {"Francais", "English"};
+
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> adapterItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,11 +42,33 @@ public class SettingsFragment extends Fragment {
 
         // Initialize the logout button
         logoutButton = view.findViewById(R.id.bLogoutSetting);
+        bMyPetsSetting = view.findViewById(R.id.bMyPetsSetting);
+
+        autoCompleteTextView = view.findViewById((R.id.auto_complete_txt));
+        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_languages_layout, language);
+        autoCompleteTextView.setAdapter(adapterItems);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), "Langue: " + item, Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logoutUser();
+            }
+        });
+
+        bMyPetsSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.fromSettingsToListPets);
             }
         });
 
