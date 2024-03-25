@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import unique.LockSchedule;
@@ -87,4 +88,14 @@ public interface InterfaceServer {
     @DELETE("api/lock_schedules/{id}")
     Call<SimpleApiResponse> deleteLockSchedule(@Header("Authorization") String authToken,
                                                @Path("id") int id);
+
+    @Headers("Accept: application/json")
+    @PUT("api/user/{id}")
+    @FormUrlEncoded
+    Call<User> updateUser(@Header("Authorization") String authToken,
+                          @Path("id") int id,
+                          @Field("firstname") String firstname,
+                          @Field("lastname") String lastname,
+                          @Field("email") String email,
+                          @Field("phone") String phone);
 }

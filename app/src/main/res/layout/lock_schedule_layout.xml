@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:text="Journées de la semaine" />
+                android:text="@string/dotw_message" />
 
             <LinearLayout
                 android:layout_width="match_parent"

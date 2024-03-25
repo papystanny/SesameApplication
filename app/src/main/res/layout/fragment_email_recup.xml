@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="Sésame"
+        android:text="@string/app_name"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="Récupération de votre adresse courriel"
+        android:text="@string/email_recup_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,10 +59,9 @@
             android:drawablePadding="5dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:hint="votre courriel"
+            android:hint="@string/email_input"
             android:inputType="text"
             android:padding="10dp"
-            android:text="john.doe@example.com"
             android:textAlignment="gravity"
             android:textColorHint="@color/black" />
 
@@ -95,7 +94,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/custom_no_border"
             android:fontFamily="@font/poppins"
-            android:text="@string/SendBtn"
+            android:text="@string/send_btn"
             android:textAllCaps="false"
             android:textColor="@color/gray"
             android:textSize="18sp" />

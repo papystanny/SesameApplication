@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="Sésame"
+        android:text="@string/app_name"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"
@@ -50,7 +50,7 @@
             android:hint="Courriel"
             android:inputType="text"
             android:padding="10dp"
-            android:text="john.doe@example.com"
+            android:text="johnDope@hotmail.com"
             android:textAlignment="gravity"
             android:textColorHint="@color/black" />
 
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="Mot de passe oublié?"
+        android:text="@string/forgot_message"
         android:textColor="@color/lightGray"
         android:textColorHint="@color/lightGray"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -140,7 +140,7 @@
             android:background="@drawable/custom_no_border"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/ConnexionBtn"
+            android:text="@string/login_btn"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/gray"
@@ -174,7 +174,7 @@
             android:drawableStart="@drawable/drawable_google"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/GoogleBtn"
+            android:text="@string/google_btn"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/black"
@@ -199,14 +199,14 @@
             android:id="@+id/tvSign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pas encore de compte? " />
+            android:text="@string/preregister_message" />
 
         <TextView
             android:id="@+id/tvSignUpLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="S'inscrire "
+            android:text="@string/register_btn"
             android:textColor="@color/orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

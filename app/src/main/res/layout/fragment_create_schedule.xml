@@ -27,7 +27,7 @@
 
         android:fontFamily="@font/righteous"
 
-        android:text="Créneau de déverouillage +"
+        android:text="@string/title_add_schedule"
 
         android:textColor="@color/orange"
 
@@ -82,7 +82,7 @@
 
             android:fontFamily="@font/poppins"
 
-            android:text="Jour de la semaine"
+            android:text="@string/dotw_message"
             android:textSize="16sp" />
 
         <androidx.cardview.widget.CardView
@@ -427,7 +427,7 @@
 
                 android:fontFamily="@font/poppins"
 
-                android:text="Devérouillage"
+                android:text="@string/unlock_message"
 
                 android:textAlignment="center"
 
@@ -498,7 +498,7 @@
 
                 android:fontFamily="@font/poppins"
 
-                android:text="Vérouillage"
+                android:text="@string/lock_message"
 
                 android:textAlignment="center"
 
@@ -549,7 +549,7 @@
         android:layout_width="294dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:text="Sélectionnez une date pour votre cédule"
+        android:text="@string/dotw_error_message"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:translationY="-15dp"
@@ -558,7 +558,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llTime"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.19999999" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/btCardAddSchedule"
@@ -583,7 +583,7 @@
             android:background="@drawable/custom_no_border"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/AddBtn"
+            android:text="@string/add_btn"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/gray"

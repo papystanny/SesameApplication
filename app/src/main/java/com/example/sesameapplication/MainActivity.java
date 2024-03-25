@@ -7,11 +7,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import unique.Pet;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton biHome, biList, biPets, biSettings, biSchedule;
+    ImageButton biHome, biList, biPets, biSettings, backArrow;
     private LinearLayout linearLayout;
     private List<Pet> list = new ArrayList<>();
     RecyclerView rvHomePage;
@@ -32,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
     NavController navController;
 
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         linearLayout = findViewById(R.id.linearLayout);
+        backArrow = findViewById(R.id.ibBackArrow);
 
         context = this;
 
@@ -53,12 +57,22 @@ public class MainActivity extends AppCompatActivity {
 
             // Ajout d'un listener pour écouter les changements de destination
             navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                // Navbar
                 if (destination.getId() == R.id.fragment_login || destination.getId() == R.id.fragment_create_account || destination.getId() == R.id.fragment_email_recup || destination.getId() == R.id.fragment_email_recup_code || destination.getId() == R.id.fragment_password_recup) {
                     // Si nous sommes dans fragment_login, cachez le LinearLayout
                     linearLayout.setVisibility(View.GONE);
-                }
-                else
+                } else {
+                    // Sinon, affichez le LinearLayout
                     linearLayout.setVisibility(View.VISIBLE);
+                }
+
+                // Back arrow
+                if (destination.getId() == R.id.fragment_create_account || destination.getId() == R.id.fragment_email_recup || destination.getId() == R.id.fragment_email_recup_code || destination.getId() == R.id.fragment_password_recup || destination.getId() == R.id.profileFragment || destination.getId() == R.id.createScheduleFragment || destination.getId() == R.id.addPetsFragment) {
+                    // Sinon, affichez le LinearLayout
+                    backArrow.setVisibility(View.VISIBLE);
+                } else {
+                    backArrow.setVisibility(View.GONE);
+                }
             });
         }
         // Configuration du NavHostFragment et du NavController
@@ -73,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
         biList.setOnClickListener(view -> { navigateUsingNavController(R.id.petActivityFragment2); resetButtonColor(); biList.setColorFilter(Color.parseColor("#FF5C00"));});
         biPets.setOnClickListener(view -> { navigateUsingNavController(R.id.petsFragment3); resetButtonColor(); biPets.setColorFilter(Color.parseColor("#FF5C00"));});
         biSettings.setOnClickListener(view -> { navigateUsingNavController(R.id.fragment_settings); resetButtonColor(); biSettings.setColorFilter(Color.parseColor("#FF5C00"));});
+
+        backArrow.setOnClickListener(view -> {
+            navController.popBackStack();
+        });
     }
 
     private void resetButtonColor() {

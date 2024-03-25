@@ -33,7 +33,7 @@
                 android:drawableStart="@drawable/drawable_output_circle"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/poppins"
-                android:text="Sortie"
+                android:text="@string/outside_message"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="24sp" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground"
@@ -45,7 +46,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:contentDescription="@string/title_home"
             android:onClick="replaceFragment"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -63,7 +63,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:contentDescription="@string/title_list"
             android:onClick="replaceFragment"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -81,7 +80,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:contentDescription="@string/title_pets"
             android:onClick="replaceFragment"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -99,7 +97,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:contentDescription="@string/title_settings"
             android:onClick="replaceFragment"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -107,5 +104,19 @@
 
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ibBackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_no_border"
+        android:src="@drawable/ic_back_arrow"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

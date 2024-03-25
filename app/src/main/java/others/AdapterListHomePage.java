@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,7 +53,7 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
         {
             vh.tvStatus.setText("Sortie");
         }
-        Picasso.get().load(list.get(position).getImg()).into(vh.ibPet);
+        Picasso.get().load(list.get(position).getImg()).into(vh.ivPet);
     }
 
     @Override
@@ -74,16 +75,16 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvStatus;
-        ImageButton ibPet;
+        ImageView ivPet;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvStatus = itemView.findViewById(R.id.tvStatus);
-            ibPet = itemView.findViewById(R.id.ivPetPhoto);
+            ivPet = itemView.findViewById(R.id.ivPetPhoto);
 
 
-            ibPet.setOnClickListener(new View.OnClickListener() {
+            ivPet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     interfacePet.gestionClick(getLayoutPosition(), list.get(getLayoutPosition()));

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/righteous"
-        android:text="@string/ProfilePage"
+        android:text="@string/title_profile"
         android:textColor="@color/orange"
         android:textColorHighlight="@color/orange"
         android:textColorHint="@color/orange"
@@ -48,16 +48,15 @@
             android:layout_height="match_parent"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/drawable_email"
-            android:drawableEnd="@drawable/drawable_close"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
+            android:hint="@string/email_input"
             android:inputType="text"
             android:padding="8dp"
             android:paddingEnd="10dp"
-            android:text="Courriel"
             android:textAlignment="gravity"
-            android:textColorHint="@color/lightGray" />
+            android:textColorHint="@color/black" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -83,12 +82,12 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
+            android:hint="@string/firstname_input"
             android:inputType="text"
             android:padding="8dp"
             android:paddingEnd="10dp"
-            android:text="Prénom"
             android:textAlignment="gravity"
-            android:textColorHint="@color/lightGray"
+            android:textColorHint="@color/black"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 
@@ -115,12 +114,12 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
+            android:hint="@string/lastname_input"
             android:inputType="text"
             android:padding="8dp"
             android:paddingEnd="10dp"
-            android:text="Nom"
             android:textAlignment="gravity"
-            android:textColorHint="@color/lightGray" />
+            android:textColorHint="@color/black" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -148,26 +147,26 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
+            android:hint="@string/phone_input"
             android:inputType="text"
             android:padding="8dp"
             android:paddingEnd="10dp"
-            android:text="Numéro de téléphone"
             android:textAlignment="gravity"
-            android:textColorHint="@color/lightGray" />
+            android:textColorHint="@color/black" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/btCardChangePassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/custom_input"
-        app:cardBackgroundColor="@color/orange"
+        app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
         app:contentPaddingLeft="10dp"
         app:contentPaddingRight="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btCardChangeProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPhoneProfil">
@@ -179,7 +178,40 @@
             android:background="@drawable/custom_no_border"
             android:drawablePadding="10dp"
             android:fontFamily="@font/poppins"
-            android:text="Changer"
+            android:text="@string/change_password_message"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textColorHighlight="#000000"
+            android:textColorLink="#000000"
+            android:textIsSelectable="false"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btCardChangeProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/custom_input"
+        app:cardBackgroundColor="@color/orange"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btCardChangePassword">
+
+        <Button
+            android:id="@+id/btChangeProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_no_border"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/confirm_btn"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/gray"

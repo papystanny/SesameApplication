@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/poppins"
-        android:text="La porte est déverouillée"
+        android:text="@string/home_message"
         android:textAlignment="center"
         android:textColor="@color/lightGray"
         android:textSize="18sp"
