@@ -37,6 +37,11 @@ public class PetActivity {
             this.collar_tag = collar_tag;
             this.outsidePeriods = new ArrayList<>();
 
+            if (inOrOut == 1)
+                Log.d("PetActivity", "Pet is outside");
+            else
+                Log.d("PetActivity", "Pet is inside");
+
             calculateTotalActivity();
     }
 
@@ -64,11 +69,16 @@ public class PetActivity {
 
             // If the pet is outside, add a new period
             if (inOrOut == 1) {
-                outsidePeriods.add(new TimePeriod(currentTime, null));
+                if (outsidePeriods.isEmpty() || outsidePeriods.get(outsidePeriods.size() - 1).getEndTime() != null) {
+                    outsidePeriods.add(new TimePeriod(currentTime, null));
+                }
             } else {
                 // If the pet is inside, update the end time of the last period
                 if (!outsidePeriods.isEmpty()) {
                     outsidePeriods.get(outsidePeriods.size() - 1).setEndTime(currentTime);
+                } else {
+                    // If there are no previous outside periods, add a new one with the current time
+                    outsidePeriods.add(new TimePeriod(currentTime, null));
                 }
             }
 

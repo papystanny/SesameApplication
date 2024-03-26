@@ -134,8 +134,9 @@ public class ProfileFragment extends Fragment {
     private void updateProfile() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", getActivity().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
-        String authToken = "Bearer : " + token;
+        String authToken = "Bearer " + token;
         Toast.makeText(getContext(), "Token : " + token, Toast.LENGTH_SHORT).show();
+        Log.d("Token", "Token : " + token);
         int id = sharedPreferences.getInt("id", -1);
 
         InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);

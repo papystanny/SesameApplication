@@ -75,6 +75,25 @@ public class AdapterListSchedule extends RecyclerView.Adapter<AdapterListSchedul
             @Override
             public void onClick(View v) {
                 vh.switch1.setChecked(!vh.switch1.isChecked());
+                SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPrefs", activity.MODE_PRIVATE);
+                String token = sharedPreferences.getString("token", "");
+                String authToken = "Bearer " + token;
+
+                InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+                Call<LockSchedule> call = interfaceServer.updateRecurring(authToken, listSchedule.get(position).getId());
+                call.enqueue(new Callback<LockSchedule>() {
+                    @Override
+                    public void onResponse(Call<LockSchedule> call, Response<LockSchedule> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(activity, "Recurring status updated", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LockSchedule> call, Throwable t) {
+                        Log.d("LockSchedule", "onFailure: " + t.getMessage());
+                    }
+                });
             }
         });
     }

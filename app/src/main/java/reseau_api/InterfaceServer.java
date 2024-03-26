@@ -98,4 +98,15 @@ public interface InterfaceServer {
                           @Field("lastname") String lastname,
                           @Field("email") String email,
                           @Field("phone") String phone);
+
+    @Headers("Accept: application/json")
+    @PUT("api/lock_schedules/updateLockDoorStatusBySchedule")
+    @FormUrlEncoded
+    Call<LockSchedule> updateLockDoorStatusBySchedule(@Header("Authorization") String authToken);
+
+    @Headers("Accept: application/json")
+    @PUT("api/lock_schedules/recurring/{id}")
+    @FormUrlEncoded
+    Call<LockSchedule> updateRecurring(@Header("Authorization") String authToken,
+                                       @Path("id") int id);
 }
