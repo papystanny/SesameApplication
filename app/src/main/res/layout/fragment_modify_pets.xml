@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTitlePetsPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous"
+        android:text="Compagnon"
+        android:textColor="@color/orange"
+        android:textColorHighlight="@color/orange"
+        android:textColorHint="@color/orange"
+        android:textColorLink="@color/orange"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.120000005" />
+
+
+    <ImageButton
+        android:id="@+id/UploadBtn"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_btn_border"
+        android:contentDescription="Upload Pet Image"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus"
+        app:srcCompat="@drawable/drawable_upload_pet_pic" />
+    <TextView
+        android:id="@+id/imageError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="Sélectionnez une image pour votre compagnon"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/UploadBtn"
+        app:layout_constraintStart_toStartOf="@+id/UploadBtn"
+        app:layout_constraintEnd_toEndOf="@+id/UploadBtn"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputNickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
+
+        <EditText
+            android:id="@+id/etNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_nickname"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Surnom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerNickName"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UploadBtn">
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_badge"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Prénom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btModifyPet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
+        android:fontFamily="@font/poppins"
+        android:text="Modifier"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputNickname"
+        app:layout_constraintVertical_bias="0.26999998" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

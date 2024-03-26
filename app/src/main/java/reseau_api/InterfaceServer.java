@@ -71,6 +71,7 @@ public interface InterfaceServer {
             @Path("userID") int userId);
 
     @POST("api/pets")
+    @FormUrlEncoded
     Call<Pet> addPet(@Header("Authorization") String authToken,
                      @Field("name") String name,
                      @Field("nickname") String nickname,
@@ -109,4 +110,17 @@ public interface InterfaceServer {
     @FormUrlEncoded
     Call<LockSchedule> updateRecurring(@Header("Authorization") String authToken,
                                        @Path("id") int id);
+
+    @Headers("Accept: application/json")
+    @PUT("api/pets/{id}")
+    @FormUrlEncoded
+    Call<Pet> modifyPet(@Header("Authorization") String authToken,
+                        @Path("id") int petId,
+                        @Field("name") String name,
+                        @Field("nickname") String nickname,
+                        @Field("img") String img);
+
+    @DELETE("api/pets/{id}")
+    Call<SimpleApiResponse> deletePet(@Header("Authorization") String authToken,
+                                      @Path("id") int petId);
 }

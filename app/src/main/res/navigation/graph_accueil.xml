@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_fragment_settings_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_fragment_settings_to_listPetsFragment"
+            app:destination="@id/listPetsFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_email_recup"
@@ -125,7 +128,27 @@
     <fragment
         android:id="@+id/addPetsFragment"
         android:name="com.example.sesameapplication.AddPetsFragment"
-        android:label="AddPetsFragment" />
+        android:label="AddPetsFragment" >
+        <action
+            android:id="@+id/action_addPetsFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/listPetsFragment"
+        android:name="com.example.sesameapplication.ListPetsFragment"
+        android:label="ListPetsFragment" >
+        <action
+            android:id="@+id/action_listPetsFragment_to_modifyPetsFragment"
+            app:destination="@id/modifyPetsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyPetsFragment"
+        android:name="com.example.sesameapplication.ModifyPetsFragment"
+        android:label="ModifyPetsFragment" >
+        <action
+            android:id="@+id/action_modifyPetsFragment_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
 
 
 </navigation>

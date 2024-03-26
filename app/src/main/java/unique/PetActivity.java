@@ -37,12 +37,19 @@ public class PetActivity {
             this.collar_tag = collar_tag;
             this.outsidePeriods = new ArrayList<>();
 
-            if (inOrOut == 1)
-                Log.d("PetActivity", "Pet is outside");
-            else
-                Log.d("PetActivity", "Pet is inside");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
-            calculateTotalActivity();
+        Date dateTime = null;
+        try {
+            dateTime = sdf.parse(created_at);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        time = sdfTime.format(dateTime);
+        date = sdfDate.format(dateTime);
+        totalActivity += time;
     }
 
     // METHODS
@@ -55,54 +62,6 @@ public class PetActivity {
             return finalTime;
         }
         return time; // Return unchanged time if seconds are not present
-    }
-
-    private void calculateTotalActivity() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            Date dateTime = sdf.parse(created_at);
-            String currentTime = sdfTime.format(dateTime);
-            String currentDate = sdfDate.format(dateTime);
-
-            // If the pet is outside, add a new period
-            if (inOrOut == 1) {
-                if (outsidePeriods.isEmpty() || outsidePeriods.get(outsidePeriods.size() - 1).getEndTime() != null) {
-                    outsidePeriods.add(new TimePeriod(currentTime, null));
-                }
-            } else {
-                // If the pet is inside, update the end time of the last period
-                if (!outsidePeriods.isEmpty()) {
-                    outsidePeriods.get(outsidePeriods.size() - 1).setEndTime(currentTime);
-                } else {
-                    // If there are no previous outside periods, add a new one with the current time
-                    outsidePeriods.add(new TimePeriod(currentTime, null));
-                }
-            }
-
-            // Calculate total time outside
-            long totalSeconds = 0;
-            for (TimePeriod period : outsidePeriods) {
-                if (period.getEndTime() != null) {
-                    LocalTime start = LocalTime.parse(period.getStartTime());
-                    LocalTime end = LocalTime.parse(period.getEndTime());
-                    Duration duration = Duration.between(start, end);
-                    totalSeconds += duration.getSeconds();
-                }
-            }
-
-            // Calculate total hours and minutes from totalSeconds
-            long totalHours = totalSeconds / 3600;
-            long totalMinutes = (totalSeconds % 3600) / 60;
-
-            this.totalActivity = String.format("%d heures et %d minutes", totalHours, totalMinutes);
-            this.date = currentDate;
-            this.time = validateTime(currentTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     // GETTERS AND SETTERS

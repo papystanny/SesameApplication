@@ -1,3 +1,4 @@
+
 package com.example.sesameapplication;
 
 import static android.app.Activity.RESULT_OK;
@@ -33,6 +34,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.Map;
 
 import reseau_api.InterfaceServer;
@@ -42,26 +45,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import unique.Pet;
 
-public class AddPetsFragment extends Fragment {
+public class ModifyPetsFragment extends Fragment {
 
     View view;
-    String [] species = {"Chien", "Chat", "Lapin", "Poisson"};
 
-    AutoCompleteTextView autoCompleteTextView;
-
-    ArrayAdapter<String> adapterItems;
 
     ImageButton UploadBtn;
-    AutoCompleteTextView auto_complete_txt;
 
-    Button btCreatePet;
+    Button btModifyPet;
     private final int GALLERY_REQ_CODE = 1000;
     EditText etFirstName,etNickname;
-    View dividerFirstName, dividerNickname, dividerSpecies;
+    View dividerFirstNamePet, dividerNicknamePet;
     ActivityResultLauncher<String> pickphotoLauncher;
     ActivityResultLauncher<String[]> permissionsLauncher;
 
-    public AddPetsFragment() {
+    public ModifyPetsFragment() {
         // Required empty public constructor
     }
 
@@ -102,71 +100,56 @@ public class AddPetsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_add_pets, container, false);
+        view = inflater.inflate(R.layout.fragment_modify_pets, container, false);
 
         UploadBtn = view.findViewById(R.id.UploadBtn);
         etNickname = view.findViewById(R.id.etNickname);
         etFirstName = view.findViewById(R.id.etFirstName);
-        auto_complete_txt = view.findViewById(R.id.auto_complete_txt);
-        dividerFirstName = view.findViewById(R.id.dividerFirstName);
-        dividerNickname = view.findViewById(R.id.dividerNickname);
-        dividerSpecies = view.findViewById(R.id.dividerSpecies);
+        dividerFirstNamePet = view.findViewById(R.id.dividerFirstName);
+        dividerNicknamePet = view.findViewById(R.id.dividerNickname);
 
-        etFirstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*dividerFirstNamePet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     // Le EditText a le focus, changer la couleur du textHint
-                    dividerFirstName.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                    dividerFirstNamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
                 } else {
                     // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
-                    dividerFirstName.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                    dividerFirstNamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
                 }
             }
         });
 
-        etNickname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dividerNicknamePet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     // Le EditText a le focus, changer la couleur du textHint
-                    dividerNickname.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                    dividerNicknamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
                 } else {
                     // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
-                    dividerNickname.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                    dividerNicknamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
                 }
             }
-        });
+        });*/
 
-        auto_complete_txt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    // Le EditText a le focus, changer la couleur du textHint
-                    dividerSpecies.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
-                } else {
-                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
-                    dividerSpecies.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
-                }
-            }
-        });
-
-        btCreatePet = view.findViewById(R.id.btCreatePet);
-
-        autoCompleteTextView = view.findViewById((R.id.auto_complete_txt));
-        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_species_layout, species);
-
-        autoCompleteTextView.setAdapter(adapterItems);
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), "Espèces: " + item, Toast.LENGTH_SHORT).show();
-            }
-        });
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String imgPet = bundle.getString("img");
+            Picasso.get().load("https://randomuser.me/api/portraits/women/54.jpg").into(UploadBtn);
 
 
-        btCreatePet.setOnClickListener(new View.OnClickListener() {
+            String namePet = bundle.getString("name");
+            etFirstName.setText(namePet);
+
+            String nicknamePet = bundle.getString("nickname");
+            etNickname.setText(nicknamePet);
+        }
+
+        btModifyPet = view.findViewById(R.id.btModifyPet);
+
+        btModifyPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -184,11 +167,6 @@ public class AddPetsFragment extends Fragment {
                     etNickname.setError("Entrez le Surnom de votre compagnon");
                     valide = false;
                 }
-                if(auto_complete_txt.getText().toString().trim().isEmpty())
-                {
-                    auto_complete_txt.setError("Entrez l'espèce de votre compagnon");
-                    valide = false;
-                }
                 if(UploadBtn.getContentDescription().toString().isEmpty())
                 {
                     imageError.setVisibility(View.VISIBLE);
@@ -202,7 +180,7 @@ public class AddPetsFragment extends Fragment {
 
                 if(valide)
                 {
-                    addPet(etFirstName.getText().toString(), etNickname.getText().toString(),"", auto_complete_txt.getText().toString());
+                    modifyPet(etFirstName.getText().toString(), etNickname.getText().toString(),"");
                 }
             }
         });
@@ -244,25 +222,25 @@ public class AddPetsFragment extends Fragment {
 
 
 
-    private void addPet(String name, String nickName, String img, String type)
+    private void modifyPet(String name, String nickName, String img)
     {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
         String authToken = "Bearer " + token; // Formatage du token
 
         InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
-        Call<Pet> call = interfaceServer.addPet(authToken, name, nickName, img, type); // Utilisation du token d'authentification
+        Call<Pet> call = interfaceServer.modifyPet(authToken, 2, name, nickName, img); // Utilisation du token d'authentification
 
         call.enqueue(new Callback<Pet>() {
             @Override
             public void onResponse(Call<Pet> call, Response<Pet> response) {
                 if (response.isSuccessful()) {
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                    navController.navigate(R.id.action_addPetsFragment_to_fragment_home);
+                    navController.navigate(R.id.action_modifyPetsFragment_to_fragment_home);
                 }
                 else
                 {
-                    Toast.makeText(getContext(), "Failed to add pet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to modify pet", Toast.LENGTH_SHORT).show();
                 }
             }
 
