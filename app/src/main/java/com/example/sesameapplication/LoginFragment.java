@@ -122,8 +122,6 @@ public class LoginFragment extends Fragment {
 
             NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
             navController.navigate(R.id.fromLoginToHome);
-
-            Toast.makeText(getContext(), "Connexion automatique réussie", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -131,19 +129,41 @@ public class LoginFragment extends Fragment {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-        if (!isValidEmail(email)) {
-            Toast.makeText(getContext(), "Email invalide", Toast.LENGTH_SHORT).show();
+        // Valider l'email
+        if (!validateEmail(email)) {
+            // Si l'email est invalide, validateEmail aura déjà affiché le message d'erreur
             return;
         }
 
-        if (password.length() <= 2) {
-            Toast.makeText(getContext(), "Le mot de passe doit contenir plus de 2 caractères", Toast.LENGTH_SHORT).show();
+        // Valider le mot de passe
+        if (!validatePassword(password)) {
+            // Si le mot de passe est invalide, validatePassword aura déjà affiché le message d'erreur
             return;
         }
 
-        // Faire l'appel API ici
+        // Si les validations passent, faire l'appel API
         login(email, password);
     }
+
+    private boolean validatePassword(String password) {
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+        if (!password.matches(passwordPattern)) {
+            etPassword.setError("Le mot de passe doit contenir au moins 6 caractères, dont un chiffre, une lettre majuscule, une lettre minuscule et un caractère spécial.");
+            return false;
+        }
+        etPassword.setError(null); // Clear previous error
+        return true;
+    }
+
+    private boolean validateEmail(String email) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Format d'email invalide.");
+            return false;
+        }
+        etEmail.setError(null); // Clear previous error
+        return true;
+    }
+
 
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();

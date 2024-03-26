@@ -47,10 +47,10 @@
             android:drawablePadding="5dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:hint="Courriel"
+            android:hint="@string/email_input"
             android:inputType="text"
             android:padding="10dp"
-            android:text="johnDope@hotmail.com"
+            android:text=""
             android:textAlignment="gravity"
             android:textColorHint="@color/black" />
 
@@ -86,10 +86,10 @@
             android:drawablePadding="5dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:hint="Mot de passe"
+            android:hint="@string/password_input"
             android:inputType="text|textPassword"
             android:padding="10dp"
-            android:text="password"
+            android:text=""
             android:textAlignment="gravity"
             android:textColorHint="@color/black" />
 

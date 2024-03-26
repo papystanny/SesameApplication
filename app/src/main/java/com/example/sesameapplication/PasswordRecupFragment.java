@@ -113,7 +113,6 @@ public class PasswordRecupFragment extends Fragment {
             @Override
             public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                     navController.navigate(R.id.fromPasswordRecupToHome);
                 } else {

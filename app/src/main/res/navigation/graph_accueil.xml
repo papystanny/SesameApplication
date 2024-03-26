@@ -28,6 +28,9 @@
         <action
             android:id="@+id/fromRegisterToHome"
             app:destination="@id/fragment_home" />
+        <action
+            android:id="@+id/action_fragment_create_account_to_addPetsFragment"
+            app:destination="@id/addPetsFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_home"

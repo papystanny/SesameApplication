@@ -2,6 +2,7 @@ package com.example.sesameapplication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -93,18 +94,28 @@ public class EmailRecupFragment extends Fragment {
             }
         });
     }
-
     private void showSuccessDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Un code de réinitialisation a été envoyé, il sera valide pendant 10 minutes. Veuillez vérifier votre courriel." )
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("userEmail", etEmail.getText().toString());
-                        navController.navigate(R.id.fromEmailRecupToEmailRecupCode, bundle);
-                    }
-                })
-                .show();
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setMessage("Un code de réinitialisation a été envoyé, il sera valide pendant 10 minutes. Veuillez vérifier votre courriel.")
+                .setPositiveButton("OK", null)
+                .create();
+
+        dialog.setOnShowListener(dialogInterface -> {
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            // Changer la couleur du texte du bouton en noir
+            positiveButton.setTextColor(Color.BLACK);
+
+            positiveButton.setOnClickListener(v -> {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                Bundle bundle = new Bundle();
+                bundle.putString("userEmail", etEmail.getText().toString());
+                navController.navigate(R.id.fromEmailRecupToEmailRecupCode, bundle);
+                dialog.dismiss();
+            });
+        });
+
+        dialog.show();
     }
+
+
 }

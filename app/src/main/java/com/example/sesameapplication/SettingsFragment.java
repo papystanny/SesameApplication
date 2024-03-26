@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class SettingsFragment extends Fragment {
 
-    private Button logoutButton, profileButton;
+    private Button logoutButton, profileButton, bMyPet;
     String [] language = {"Francais", "English"};
 
     AutoCompleteTextView autoCompleteTextView;
@@ -48,6 +48,7 @@ public class SettingsFragment extends Fragment {
         // Initialize the logout button
         logoutButton = view.findViewById(R.id.bLogoutSetting);
         profileButton = view.findViewById(R.id.bProfilSetting);
+        bMyPet = view.findViewById(R.id.bMyPetsSetting);
 
         autoCompleteTextView = view.findViewById((R.id.auto_complete_txt));
         adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_languages_layout, language);
@@ -64,6 +65,15 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
+
+        bMyPet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.action_fragment_settings_to_profileFragment);
+            }
+        });
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

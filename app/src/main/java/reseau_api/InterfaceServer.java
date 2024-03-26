@@ -20,33 +20,32 @@ import unique.PetActivity;
 import unique.User;
 
 public interface InterfaceServer {
-
-    // Méthode pour la connexion
+    @Headers("Accept: application/json")
     @POST("api/login")
     @FormUrlEncoded
     Call<LoginResponse> login(@Field("email") String email,
                               @Field("password") String password);
-
+    @Headers("Accept: application/json")
     @POST("api/logout")
     Call<SimpleApiResponse> logout(@Header("Authorization") String authToken);
 
 
-
+    @Headers("Accept: application/json")
     @POST("api/send-reset-code")
     @FormUrlEncoded
     Call<User> send_reset_code(@Field("email") String email);
-
+    @Headers("Accept: application/json")
     @POST("api/changePassword")
     @FormUrlEncoded
     Call<SimpleApiResponse> changePassword(@Field("email") String email,
                                            @Field("password") String password,
                                            @Field("password_confirmation") String password_confirmation);
-
+    @Headers("Accept: application/json")
     @POST("api/verify-Reset-Token")
     @FormUrlEncoded
     Call<SimpleApiResponse> verify_Reset_Token(@Field("email") String email,
                                                @Field("token") String token);
-
+    @Headers("Accept: application/json")
     @POST("api/register")
     @FormUrlEncoded
     Call<LoginResponse> register(@Field("firstname") String firstname,
@@ -54,22 +53,22 @@ public interface InterfaceServer {
                                  @Field("phone") String phone,
                                  @Field("email") String email,
                                  @Field("password") String password);
-
+    @Headers("Accept: application/json")
     @GET("api/pets/user/{id}")
     Call<List<Pet>> getPetsByUser(
             @Header("Authorization") String authToken,
             @Path("id") int userId);
-
+    @Headers("Accept: application/json")
     @GET("api/activity/{userID}")
     Call<List<PetActivity>> getPetActivity(
             @Header("Authorization") String authToken,
             @Path("userID") int userId);
-
+    @Headers("Accept: application/json")
     @GET("api/lock_schedules/{userID}")
     Call<List<LockSchedule>> getLockSchedules(
             @Header("Authorization") String authToken,
             @Path("userID") int userId);
-
+    @Headers("Accept: application/json")
     @POST("api/pets")
     @FormUrlEncoded
     Call<Pet> addPet(@Header("Authorization") String authToken,
@@ -77,7 +76,7 @@ public interface InterfaceServer {
                      @Field("nickname") String nickname,
                      @Field("img") String img,
                      @Field("type") String type);
-
+    @Headers("Accept: application/json")
     @POST("api/lock_schedules")
     @FormUrlEncoded
     Call<LockSchedule> addLockSchedule(@Header("Authorization") String authToken,
@@ -85,7 +84,7 @@ public interface InterfaceServer {
                                        @Field("opening_time") String opening_time,
                                        @Field("closing_time") String closing_time,
                                        @Field("reccuring") int reccuring);
-
+    @Headers("Accept: application/json")
     @DELETE("api/lock_schedules/{id}")
     Call<SimpleApiResponse> deleteLockSchedule(@Header("Authorization") String authToken,
                                                @Path("id") int id);
@@ -119,7 +118,7 @@ public interface InterfaceServer {
                         @Field("name") String name,
                         @Field("nickname") String nickname,
                         @Field("img") String img);
-
+    @Headers("Accept: application/json")
     @DELETE("api/pets/{id}")
     Call<SimpleApiResponse> deletePet(@Header("Authorization") String authToken,
                                       @Path("id") int petId);

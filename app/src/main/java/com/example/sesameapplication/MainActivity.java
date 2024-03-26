@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -105,6 +106,16 @@ public class MainActivity extends AppCompatActivity {
             navController.navigate(actionId);
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // Ignorer l'événement de retour
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
     // L méthode pour naviguer d'un fragment à un autre créait un problème. le fragment home
     // était toujours là et ne disparaissait jamais alors j'ai enlevé cette méthode pour faire que les fragments s'échange avec le navhost 

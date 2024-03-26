@@ -202,7 +202,7 @@ public class CreateAccountFragment extends Fragment {
 
                     Toast.makeText(getContext(), "Compte créé avec succès", Toast.LENGTH_LONG).show();
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                    navController.navigate(R.id.fromRegisterToHome);
+                    navController.navigate(R.id.action_fragment_create_account_to_addPetsFragment);
                 } else {
                     // Gestion des erreurs
                     String errorMessage = "Échec de création de compte"; // Message par défaut
