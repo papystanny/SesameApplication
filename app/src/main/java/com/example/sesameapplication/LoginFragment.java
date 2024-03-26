@@ -45,7 +45,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //checkLogin();
+        checkLogin();
 
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etMdp);

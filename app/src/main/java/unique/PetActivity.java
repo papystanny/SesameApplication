@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -27,29 +28,40 @@ public class PetActivity {
     @SerializedName("created_at")
     private String created_at;
     private String totalActivity;
-    private List<TimePeriod> outsidePeriods;
+    private Date totalActivityDate;
+    private Date lastDate;
+    private List<String> outsideHours;
 
 
     // CONSTRUCTOR
     public PetActivity(int inOrOut, String created_at, String collar_tag) {
-           this.inOrOut = inOrOut;
-            this.created_at = created_at;
-            this.collar_tag = collar_tag;
-            this.outsidePeriods = new ArrayList<>();
+        this.inOrOut = inOrOut;
+        this.created_at = created_at;
+        this.collar_tag = collar_tag;
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
-            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
-        Date dateTime = null;
+        Date dateTime;
         try {
             dateTime = sdf.parse(created_at);
+
+            time = sdfTime.format(dateTime);
+            date = sdfDate.format(dateTime);
+            time = validateTime(time);
+
+            // Initialiser la liste des heures à l'extérieur si elle n'est pas déjà initialisée
+            if (inOrOut == 1) { // Si le chien est à l'extérieur
+                if (outsideHours == null) {
+                    outsideHours = new ArrayList<>();
+                }
+                outsideHours.add(time); // Ajouter cette heure à la liste des heures à l'extérieur
+            }
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        time = sdfTime.format(dateTime);
-        date = sdfDate.format(dateTime);
-        totalActivity += time;
+        totalActivity = calculateTotalOutsideHours();
     }
 
     // METHODS
@@ -62,6 +74,29 @@ public class PetActivity {
             return finalTime;
         }
         return time; // Return unchanged time if seconds are not present
+    }
+
+    // Méthode pour calculer le total des heures à l'extérieur pour la journée
+    public String calculateTotalOutsideHours() {
+        if (outsideHours == null || outsideHours.isEmpty()) {
+            return "0"; // Si aucune heure à l'extérieur n'est enregistrée
+        } else {
+            // Calculer le total des heures à l'extérieur
+            long totalMilliseconds = 0;
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            for (String hour : outsideHours) {
+                try {
+                    Date hourDate = sdf.parse(hour);
+                    totalMilliseconds += hourDate.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            // Convertir le total des millisecondes en heures et minutes
+            long totalHours = totalMilliseconds / (60 * 60 * 1000);
+            long totalMinutes = (totalMilliseconds / (60 * 1000)) % 60;
+            return totalHours + "h" + totalMinutes;
+        }
     }
 
     // GETTERS AND SETTERS
@@ -132,28 +167,5 @@ public class PetActivity {
                 ", collar_tag='" + collar_tag + '\'' +
                 ", created_at='" + created_at + '\'' +
                 '}';
-    }
-
-    // Inner class to represent a time period
-    private static class TimePeriod {
-        private String startTime;
-        private String endTime;
-
-        public TimePeriod(String startTime, String endTime) {
-            this.startTime = startTime;
-            this.endTime = endTime;
-        }
-
-        public String getStartTime() {
-            return startTime;
-        }
-
-        public String getEndTime() {
-            return endTime;
-        }
-
-        public void setEndTime(String endTime) {
-            this.endTime = endTime;
-        }
     }
 }
