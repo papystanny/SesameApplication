@@ -1,6 +1,5 @@
 package others;
 
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import unique.Pet;
 import unique.PetActivity;
@@ -59,32 +57,19 @@ public class AdapterListPet extends RecyclerView.Adapter<AdapterListPet.ViewHold
         if (listPet.get(position).getIsOutside() == 0) {
             vh.isOutside.setText("Entrée");
             vh.isOutside.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_input_circle_home, 0, 0, 0);
+        } else {
+            vh.isOutside.setText("Sortie");
+            vh.isOutside.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_output_circle_home, 0, 0, 0);
         }
         Picasso.get().load(listPet.get(position).getImg()).into(vh.ivPet);
 
         Collections.reverse(listPetActivity);
         for (PetActivity petActivity : listPetActivity) {
             if (petActivity.getCollar_tag().equals(listPet.get(position).getCollar_tag()) && petActivity.isInOrOut() == 1) {
-                if (Locale.getDefault().getLanguage().equals("fr")) {
-                    vh.isOutside.setText("Sortie");
-                    vh.isOutside.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_output_circle_home, 0, 0, 0);
-                    vh.tvLastActivity.setText("Dernière sortie : " + petActivity.getTime());
-                } else {
-                    vh.isOutside.setText("Outside");
-                    vh.isOutside.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_output_circle_home, 0, 0, 0);
-                    vh.tvLastActivity.setText("Last time outside : " + petActivity.getTime());
-                }
+                vh.tvLastActivity.setText("Dernière sortie : " + petActivity.getTime());
             }
-            if (petActivity.getCollar_tag().equals(listPet.get(position).getCollar_tag()) && petActivity.isInOrOut() == 0) {
-                if (Locale.getDefault().getLanguage().equals("fr")) {
-                    vh.isOutside.setText("Entrée");
-                    vh.isOutside.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_input_circle_home, 0, 0, 0);
-                    vh.tvTotalActivity.setText(listPet.get(position).getName() + " est sortie : " + petActivity.getTotalActivity() + " aujourd'hui");
-                } else {
-                    vh.isOutside.setText("Inside");
-                    vh.isOutside.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_input_circle_home, 0, 0, 0);
-                    vh.tvTotalActivity.setText(listPet.get(position).getName() + " is outside : " + petActivity.getTotalActivity() + " today");
-                }
+            if (petActivity.getCollar_tag().equals(listPet.get(position).getCollar_tag())) {
+                vh.tvTotalActivity.setText(listPet.get(position).getName() + " est sortie : " + petActivity.getTotalActivity() + " aujourd'hui");
             }
         }
 
@@ -123,6 +108,7 @@ public class AdapterListPet extends RecyclerView.Adapter<AdapterListPet.ViewHold
             tvName = itemView.findViewById(R.id.tvNameCompagnon);
             tvNickName = itemView.findViewById(R.id.tvNicknameCompagnon);
             isOutside = itemView.findViewById(R.id.tvStatus);
+            tvTotalActivity = itemView.findViewById(R.id.tvTimeOut);
             tvLastActivity = itemView.findViewById(R.id.tvLastOut);
             ivPet = itemView.findViewById(R.id.ivPetCompagnon);
             ibNext = itemView.findViewById(R.id.btNextPage);

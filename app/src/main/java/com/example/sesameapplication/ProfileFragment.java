@@ -146,11 +146,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    sharedPreferences.edit().putString("firstname", etFirstName.getText().toString()).apply();
-                    sharedPreferences.edit().putString("lastname", etLastName.getText().toString()).apply();
-                    sharedPreferences.edit().putString("email", etEmail.getText().toString()).apply();
-                    sharedPreferences.edit().putString("phone", etPhone.getText().toString()).apply();
-                    sharedPreferences.edit().apply();
+
                     //Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();

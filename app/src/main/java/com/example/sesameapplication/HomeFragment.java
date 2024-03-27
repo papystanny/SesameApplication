@@ -1,7 +1,5 @@
 package com.example.sesameapplication;
 
-import static java.lang.String.valueOf;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,7 +33,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import unique.Pet;
-import unique.PetActivity;
 
 
 public class HomeFragment extends Fragment implements AdapterListHomePage.InterfacePet {
@@ -46,33 +43,24 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
     TextView tvMsg;
     AdapterListHomePage.InterfacePet interfacePet;
     AdapterListHomePage adapterListHomePage;
-    String isLocked;
-    String isUnlocked;
+    String isLocked = "Porte verrouillée";
     private List<Pet> listPet = new ArrayList<>();
-    private List<PetActivity> listPetActivity = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        isLocked = getResources().getString(R.string.home_lock_message);
-        isUnlocked = getResources().getString(R.string.home_unlock_message);
-
         if (listPet.size() > 0) {
             listPet.clear();
         }
-        if (listPetActivity.size() > 0) {
-            listPetActivity.clear();
-        }
         getPets();
-        getPetActivity();
         rvHomePage = view.findViewById(R.id.rvHomePage);
         rvHomePage.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rvHomePage.setHasFixedSize(true);
         SnapHelper snapHelper = new GravitySnapHelper(Gravity.START);
         snapHelper.attachToRecyclerView(rvHomePage);
-        adapterListHomePage = new AdapterListHomePage(listPet, this, listPetActivity);
+        adapterListHomePage = new AdapterListHomePage(listPet, this);
         rvHomePage.setAdapter(adapterListHomePage);
 
         // Appeler la méthode pour afficher les SharedPreferences
@@ -159,36 +147,6 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
         });
     }
 
-    private void getPetActivity() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", getContext().MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", "");
-        String authToken = "Bearer " + token; // Formatage du token
-        int userId = sharedPreferences.getInt("id", 0);
-
-        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
-        Call<List<PetActivity>> call = interfaceServer.getPetActivity(authToken, userId);
-
-        call.enqueue(new Callback<List<PetActivity>>() {
-            @Override
-            public void onResponse(Call<List<PetActivity>> call, Response<List<PetActivity>> response) {
-                if (response.isSuccessful()) {
-                    for (PetActivity petActivity : response.body()) {
-                        int inOrOut = petActivity.isInOrOut();
-                        String created_at = petActivity.getCreated_at();
-                        String collar_tag = petActivity.getCollar_tag();
-                        listPetActivity.add(new PetActivity(inOrOut, created_at, collar_tag));
-                        adapterListHomePage.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PetActivity>> call, Throwable t) {
-                // Afficher un message d'erreur
-            }
-        });
-    }
-
     private void getStatusDoor(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
@@ -202,12 +160,16 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
             @Override
             public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getMessage().equals("Porte verrouillée")) {
+                    String texte = response.body().getMessage().toString();
+                    tvMsg.setText(texte);
+                    if (isLocked.equals(texte)) {
+
                         ibHomeLock.setImageResource(R.drawable.close);
-                        tvMsg.setText(isLocked);
+                        isLocked =texte;
+
                     } else {
                         ibHomeLock.setImageResource(R.drawable.open);
-                        tvMsg.setText(isUnlocked);
+                        isLocked =texte;
                     }
                 } else {
                     Toast.makeText(getContext(), "BAD RESPONSE Lors de la récupération du statut de la porte", Toast.LENGTH_SHORT).show();

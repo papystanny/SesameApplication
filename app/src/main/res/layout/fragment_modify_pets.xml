@@ -22,94 +22,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.120000005" />
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:translationY="-10dp"
-        app:cardBackgroundColor="@color/gray"
-        app:cardCornerRadius="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageError"
+    <ImageButton
+        android:id="@+id/UploadBtn"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_btn_border"
+        android:contentDescription="Upload Pet Image"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus">
-
-        <ImageButton
-            android:id="@+id/UploadBtn"
-            android:layout_width="match_parent"
-            android:layout_height="143dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/custom_rounded_corner"
-            android:contentDescription="Upload Pet Image"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/drawable_upload_pet_pic" />
-    </androidx.cardview.widget.CardView>
-
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus"
+        app:srcCompat="@drawable/drawable_upload_pet_pic" />
     <TextView
         android:id="@+id/imageError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Sélectionnez une image pour votre compagnon"
         android:textColor="@android:color/holo_red_dark"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        android:text="Sélectionnez une image pour votre compagnon"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/UploadBtn"
+        app:layout_constraintStart_toStartOf="@+id/UploadBtn"
+        app:layout_constraintEnd_toEndOf="@+id/UploadBtn"/>
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/inputFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="65dp"
-        app:cardBackgroundColor="@color/gray"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/inputNickname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-        <EditText
-            android:id="@+id/etFirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/custom_input"
-            android:drawableLeft="@drawable/drawable_badge"
-            android:drawablePadding="5dp"
-            android:ems="10"
-            android:fontFamily="@font/poppins"
-            android:hint="@string/firstname_input"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textAlignment="gravity"
-            android:textColorHint="@color/black" />
-
-        <View
-            android:id="@+id/dividerFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="30dp"
-            android:background="@color/lightGray"
-            android:translationY="38dp" />
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/inputNickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="65dp"
+        android:layout_marginTop="20dp"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="15dp"
         app:cardElevation="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/bModifyCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
@@ -118,12 +66,13 @@
             android:id="@+id/etNickname"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginStart="20dp"
             android:background="@drawable/custom_input"
             android:drawableLeft="@drawable/drawable_nickname"
             android:drawablePadding="5dp"
             android:ems="10"
             android:fontFamily="@font/poppins"
-            android:hint="@string/nickname_input"
+            android:hint="Surnom"
             android:inputType="text"
             android:padding="10dp"
             android:textAlignment="gravity"
@@ -139,31 +88,56 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/bModifyCard"
+        android:id="@+id/inputFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="65dp"
+        android:layout_marginTop="30dp"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UploadBtn">
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/custom_input"
+            android:drawableLeft="@drawable/drawable_badge"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Prénom"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textAlignment="gravity"
+            android:textColorHint="@color/black" />
+
+        <View
+            android:id="@+id/dividerFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/lightGray"
+            android:translationY="38dp" />
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btModifyPet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:background="@drawable/custom_input"
-        app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="5dp"
-        app:contentPaddingLeft="10dp"
-        app:contentPaddingRight="10dp"
+        android:backgroundTint="@color/orange"
+        android:fontFamily="@font/poppins"
+        android:text="Modifier"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNickname">
-
-        <Button
-            android:id="@+id/btModifyPet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_no_border"
-            android:fontFamily="@font/poppins"
-            android:text="@string/confirm_btn"
-            android:textAllCaps="false"
-            android:textSize="18sp" />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/inputNickname"
+        app:layout_constraintVertical_bias="0.26999998" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

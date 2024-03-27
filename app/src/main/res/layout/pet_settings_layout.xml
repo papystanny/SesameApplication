@@ -1,36 +1,22 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="18dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/gray"
-        app:cardCornerRadius="300dp">
-
-        <ImageView
-            android:id="@+id/ibPet"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/custom_rounded_corner"
-            android:contentDescription="PetImage" />
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/ibPet"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/drawable_upload_pet_pic" />
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/poppins"
-        android:text="@string/inside_message"
-        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
         android:textSize="24sp" />
-
 </LinearLayout>
