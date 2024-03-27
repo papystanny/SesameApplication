@@ -108,7 +108,7 @@ public class ModifyPetsFragment extends Fragment {
         dividerFirstNamePet = view.findViewById(R.id.dividerFirstName);
         dividerNicknamePet = view.findViewById(R.id.dividerNickname);
 
-        /*dividerFirstNamePet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etFirstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -121,7 +121,7 @@ public class ModifyPetsFragment extends Fragment {
             }
         });
 
-        dividerNicknamePet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etNickname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -132,12 +132,12 @@ public class ModifyPetsFragment extends Fragment {
                     dividerNicknamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
                 }
             }
-        });*/
+        });
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             String imgPet = bundle.getString("img");
-            Picasso.get().load("https://randomuser.me/api/portraits/women/54.jpg").into(UploadBtn);
+            Picasso.get().load(imgPet).into(UploadBtn);
 
 
             String namePet = bundle.getString("name");

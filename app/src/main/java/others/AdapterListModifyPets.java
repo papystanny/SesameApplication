@@ -2,6 +2,7 @@ package others;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sesameapplication.R;
@@ -35,12 +38,14 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
     InterfaceModifyPets interfaceModifyPets;
     List<Pet> list;
     Activity activity;
+    Bundle bundle;
 
-    public AdapterListModifyPets(List<Pet> list, InterfaceModifyPets interfaceModifyPets, Activity activity)
+    public AdapterListModifyPets(List<Pet> list, InterfaceModifyPets interfaceModifyPets, Activity activity, Bundle bundle)
     {
         this.list = list;
         this.interfaceModifyPets = interfaceModifyPets;
         this.activity = activity;
+        this.bundle = bundle;
     }
 
     @NonNull
@@ -68,6 +73,8 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
                     Pet pet = list.get(adapterPosition);
                     interfaceModifyPets.gestionClick(adapterPosition, pet);
                 }
+                NavController navController = Navigation.findNavController(activity, R.id.fragmentContainerView);
+                navController.navigate(R.id.action_listPetsFragment_to_modifyPetsFragment, bundle);
             }
         });
     }

@@ -123,7 +123,6 @@ public class AdapterListPet extends RecyclerView.Adapter<AdapterListPet.ViewHold
             tvName = itemView.findViewById(R.id.tvNameCompagnon);
             tvNickName = itemView.findViewById(R.id.tvNicknameCompagnon);
             isOutside = itemView.findViewById(R.id.tvStatus);
-            tvTotalActivity = itemView.findViewById(R.id.tvTimeOut);
             tvLastActivity = itemView.findViewById(R.id.tvLastOut);
             ivPet = itemView.findViewById(R.id.ivPetCompagnon);
             ibNext = itemView.findViewById(R.id.btNextPage);
