@@ -163,6 +163,7 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
                     String texte = response.body().getMessage().toString();
                     tvMsg.setText(texte);
                     if (isLocked.equals(texte)) {
+
                         ibHomeLock.setImageResource(R.drawable.close);
                         isLocked =texte;
 

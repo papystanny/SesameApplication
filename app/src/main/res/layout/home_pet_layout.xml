@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins"
-                android:text="@string/outside_message"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

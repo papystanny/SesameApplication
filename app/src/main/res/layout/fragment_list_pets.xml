@@ -29,14 +29,29 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvPet_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="44dp"
+        android:visibility="gone"
         android:fontFamily="@font/poppins"
-        android:text="Quel compagnon souhaitez-vous modifier ?"
+        android:text="@string/pet_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus" />
+
+    <TextView
+        android:id="@+id/tvNoPetYet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="92dp"
+        android:text="@string/no_pet_message"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus" />
 
@@ -44,12 +59,15 @@
         android:id="@+id/rvListPet"
         android:layout_width="409dp"
         android:layout_height="410dp"
+        android:visibility="gone"
         android:layout_marginTop="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
