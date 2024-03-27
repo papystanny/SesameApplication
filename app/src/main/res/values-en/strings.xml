@@ -47,6 +47,4 @@
     <string name="last_activity_message">No activies as of today</string>
     <string name="total_activity_message">No total yet</string>
     <string name="no_activity_message">No activity yet today</string>
-    <string name="no_pet_message">No pet yet </string>
-    <string name="pet_edit"> Which pet do you want edit ? </string>
 </resources>

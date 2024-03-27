@@ -31,9 +31,6 @@
         <action
             android:id="@+id/action_fragment_create_account_to_addPetsFragment"
             app:destination="@id/addPetsFragment" />
-        <action
-            android:id="@+id/action_fragment_create_account_to_petsFragment3"
-            app:destination="@id/petsFragment3" />
     </fragment>
     <fragment
         android:id="@+id/fragment_home"

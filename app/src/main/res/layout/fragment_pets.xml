@@ -42,25 +42,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26" />
 
-    <TextView
-        android:id="@+id/tvNoPetYet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="117dp"
-        android:text="@string/no_pet_message"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitlePetsPlus" />
-
     <com.github.rubensousa.gravitysnaphelper.GravitySnapRecyclerView
         android:id="@+id/rvPets"
         android:layout_width="409dp"
         android:layout_height="497dp"
         android:layout_marginTop="140dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

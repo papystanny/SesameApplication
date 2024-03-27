@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
@@ -40,7 +39,6 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
 
     ImageButton ibAddPet;
     RecyclerView rvPets;
-    TextView tvNoPetYet;
     AdapterListPet adapterListPet;
     List<Pet> listPet = new ArrayList<>();
     List<PetActivity> listPetActivity = new ArrayList<>();
@@ -52,7 +50,6 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
         View view = inflater.inflate(R.layout.fragment_pets, container, false);
 
         ibAddPet = view.findViewById(R.id.ibAddPet);
-        tvNoPetYet = view.findViewById(R.id.tvNoPetYet);
 
         ibAddPet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,16 +97,8 @@ public class PetsFragment extends Fragment implements AdapterListPet.InterfacePe
                         String collarTag = pet.getCollar_tag();
                         int isOutside = pet.getIsOutside();
                         listPet.add(new Pet(id, name, nickname, type, img, collarTag, isOutside));
-                        if (!listPet.isEmpty()){
-                            rvPets.setVisibility(View.VISIBLE);
-                            tvNoPetYet.setVisibility(View.GONE);
-                        } else {
-                            rvPets.setVisibility(View.GONE);
-                            tvNoPetYet.setVisibility(View.VISIBLE);
-                        }
                         adapterListPet.notifyDataSetChanged();
                     }
-
                 }
             }
 
