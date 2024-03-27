@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_fragment_home_to_petActivityFragment2"
             app:destination="@id/petActivityFragment2" />
+        <action
+            android:id="@+id/action_fragment_home_self"
+            app:destination="@id/fragment_home" />
     </fragment>
     <fragment
         android:id="@+id/fragment_settings"

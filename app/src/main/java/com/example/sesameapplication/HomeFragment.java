@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
     TextView tvMsg;
     AdapterListHomePage.InterfacePet interfacePet;
     AdapterListHomePage adapterListHomePage;
-    boolean isLocked = true;
+    String isLocked = "Porte verrouillée";
     private List<Pet> listPet = new ArrayList<>();
 
     @Override
@@ -70,18 +70,12 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
         ibHomeLock = view.findViewById(R.id.ibHomeLock);
         ibSchedule = view.findViewById(R.id.ibSchedule);
         tvMsg = view.findViewById(R.id.tvMsg);
+        getStatusDoor();
+
         ibHomeLock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isLocked) {
-                    ibHomeLock.setImageResource(R.drawable.close);
-                    tvMsg.setText("La porte est verrouillée");
-
-                } else {
-                    ibHomeLock.setImageResource(R.drawable.open);
-                    tvMsg.setText("La porte est déverrouillée");
-                }
-                isLocked = !isLocked;
+                lockAndUnlock();
             }
         });
 
@@ -148,13 +142,77 @@ public class HomeFragment extends Fragment implements AdapterListHomePage.Interf
 
             @Override
             public void onFailure(Call<List<Pet>> call, Throwable t) {
-                Toast.makeText(getContext(), "FAILURE : " + t, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "FAILURE : " + t + "-404", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private void getStatusDoor(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        String authToken = "Bearer " + token; // Formatage du token
+        int id = sharedPreferences.getInt("id", -1);
+
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<SimpleApiResponse> call = interfaceServer.getStatusDoor(authToken);
+
+        call.enqueue(new Callback<SimpleApiResponse>() {
+            @Override
+            public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    String texte = response.body().getMessage().toString();
+                    tvMsg.setText(texte);
+                    if (isLocked.equals(texte)) {
+                        ibHomeLock.setImageResource(R.drawable.close);
+                        isLocked =texte;
+
+                    } else {
+                        ibHomeLock.setImageResource(R.drawable.open);
+                        isLocked =texte;
+                    }
+                } else {
+                    Toast.makeText(getContext(), "BAD RESPONSE Lors de la récupération du statut de la porte", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleApiResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "FAILURE : " + t + "-404", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void lockAndUnlock(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        String authToken = "Bearer " + token; // Formatage du token
+        int id = sharedPreferences.getInt("id", -1);
+
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<SimpleApiResponse> call = interfaceServer.lockAndUnlock(authToken);
+
+        call.enqueue(new Callback<SimpleApiResponse>() {
+            @Override
+            public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                    navController.navigate(R.id.action_fragment_home_self );
+                    //Toast.makeText(getContext(), "Changement réussi", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "BAD RESPONSE Lors de la récupération du statut de la porte", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleApiResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "FAILURE : " + t + "-404", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     @Override
     public void gestionClick(int position, Pet pet) {
-        Toast.makeText(getContext(), "Click on " + pet.getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Click on " + pet.getName(), Toast.LENGTH_SHORT).show();
     }
 }

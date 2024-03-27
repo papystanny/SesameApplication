@@ -58,6 +58,13 @@ public interface InterfaceServer {
     Call<List<Pet>> getPetsByUser(
             @Header("Authorization") String authToken,
             @Path("id") int userId);
+
+
+    @Headers("Accept: application/json")
+    @GET("api/door/getStatusDoor")
+    Call<SimpleApiResponse> getStatusDoor(
+            @Header("Authorization") String authToken);
+
     @Headers("Accept: application/json")
     @GET("api/activity/{userID}")
     Call<List<PetActivity>> getPetActivity(
@@ -76,6 +83,11 @@ public interface InterfaceServer {
                      @Field("nickname") String nickname,
                      @Field("img") String img,
                      @Field("type") String type);
+
+    @Headers("Accept: application/json")
+    @POST("api/door/lockAndUnlockDoor")
+    Call<SimpleApiResponse> lockAndUnlock(@Header("Authorization") String authToken );
+
     @Headers("Accept: application/json")
     @POST("api/lock_schedules")
     @FormUrlEncoded

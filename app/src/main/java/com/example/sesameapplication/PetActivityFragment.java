@@ -74,6 +74,9 @@ public class PetActivityFragment extends Fragment implements AdapterListActivity
                         listPetActivity.add(new PetActivity(inOrOut, created_at, collar_tag));
                         adapterList.notifyDataSetChanged();
                     }
+                    if (adapterList.getItemCount() == 0){
+                        rvPetActivity.visi;
+                    }
                 }
                 else {
                     Toast.makeText(getContext(), "BAD RESPONSE : " + response.errorBody(), Toast.LENGTH_LONG).show();

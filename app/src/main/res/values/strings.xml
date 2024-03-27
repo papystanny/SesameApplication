@@ -47,6 +47,7 @@
     <string name="lock_message">Verouillage</string>
     <string name="last_activity_message">Pas encore de sortie aujourd\'hui</string>
     <string name="total_activity_message">Pas encore de total encore</string>
+    <string name="no_activity_message">Aucune activité pour aujourdhui </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="login_btn">Connexion</string>

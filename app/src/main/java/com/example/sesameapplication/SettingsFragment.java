@@ -70,7 +70,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-                navController.navigate(R.id.action_fragment_settings_to_profileFragment);
+                navController.navigate(R.id.action_fragment_settings_to_listPetsFragment);
             }
         });
 

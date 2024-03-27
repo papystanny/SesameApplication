@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
         btRegister = view.findViewById(R.id.tvSignUpLink);
         btPasswordForget = view.findViewById(R.id.tvMdpForgot);
 
-        Toast.makeText(getContext(), "J'entre", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "J'entre", Toast.LENGTH_SHORT).show();
 
         etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -196,7 +196,7 @@ public class LoginFragment extends Fragment {
                     navController.navigate(R.id.fromLoginToHome);
 
 
-                    Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     Log.d("LoginResponse", "Statut HTTP : " + response.code());

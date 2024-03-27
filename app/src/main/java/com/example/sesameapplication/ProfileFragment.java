@@ -135,7 +135,7 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", getActivity().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
         String authToken = "Bearer " + token;
-        Toast.makeText(getContext(), "Token : " + token, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Token : " + token, Toast.LENGTH_SHORT).show();
         Log.d("Token", "Token : " + token);
         int id = sharedPreferences.getInt("id", -1);
 
@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
 
-                    Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Connexion réussie", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                     Log.d("LoginResponse", "Statut HTTP : " + response.errorBody());
