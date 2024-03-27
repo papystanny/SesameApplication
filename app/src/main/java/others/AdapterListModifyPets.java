@@ -1,5 +1,8 @@
 package others;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import reseau_api.InterfaceServer;
+import reseau_api.RetrofitInstance;
+import reseau_api.SimpleApiResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import unique.Pet;
 
 public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModifyPets.ViewHolder>{
@@ -25,11 +34,13 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
 
     InterfaceModifyPets interfaceModifyPets;
     List<Pet> list;
+    Activity activity;
 
-    public AdapterListModifyPets(List<Pet> list, InterfaceModifyPets interfaceModifyPets)
+    public AdapterListModifyPets(List<Pet> list, InterfaceModifyPets interfaceModifyPets, Activity activity)
     {
         this.list = list;
         this.interfaceModifyPets = interfaceModifyPets;
+        this.activity = activity;
     }
 
     @NonNull
@@ -75,17 +86,42 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ibPet;
         TextView tvName;
+        int position;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ibPet = itemView.findViewById(R.id.ibPet);
             tvName = itemView.findViewById(R.id.tvName);
 
-
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    position = getAdapterPosition();
+                    interfaceModifyPets.gestionClick(position, list.get(position));
 
-                    //call delete pets
+                    SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPrefs", activity.MODE_PRIVATE);
+                    String token = sharedPreferences.getString("token", "");
+                    String authToken = "Bearer " + token;
+
+                    InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+                    Call<SimpleApiResponse> call = interfaceServer.deletePet(authToken, list.get(position).getId());
+
+                    call.enqueue(new Callback<SimpleApiResponse>() {
+                        @Override
+                        public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
+                            if (response.isSuccessful()) {
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, list.size());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SimpleApiResponse> call, Throwable t) {
+                            Log.d("Pet", "onFailure: " + t.getMessage());
+                        }
+                    });
+
                     return false;
                 }
             });

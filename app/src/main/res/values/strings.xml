@@ -33,7 +33,8 @@
 
     <string name="inside_message">Entrée</string>
     <string name="outside_message">Sortie</string>
-    <string name="home_message">La porte est déverrouillée</string>
+    <string name="home_unlock_message">La porte est déverrouillée</string>
+    <string name="home_lock_message">La porte est verrouillée</string>
     <string name="forgot_message">Mot de passe oublié?</string>
     <string name="preregister_message">Pas encore de compte?</string>
     <string name="register_message">Création de votre compte</string>
@@ -49,6 +50,5 @@
     <string name="total_activity_message">Pas encore de total encore</string>
     <string name="no_activity_message">Aucune activité pour aujourdhui </string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="login_btn">Connexion</string>
 </resources>

@@ -75,6 +75,7 @@ public interface InterfaceServer {
     Call<List<LockSchedule>> getLockSchedules(
             @Header("Authorization") String authToken,
             @Path("userID") int userId);
+
     @Headers("Accept: application/json")
     @POST("api/pets")
     @FormUrlEncoded
