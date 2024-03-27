@@ -93,13 +93,42 @@ public class ModifyPetsFragment extends Fragment {
         etFirstName = view.findViewById(R.id.etFirstName);
         btModifyPet = view.findViewById(R.id.btModifyPet);
     }
+        dividerFirstNamePet = view.findViewById(R.id.dividerFirstName);
+        dividerNicknamePet = view.findViewById(R.id.dividerNickname);
+
+        etFirstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerFirstNamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerFirstNamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
+
+        etNickname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // Le EditText a le focus, changer la couleur du textHint
+                    dividerNicknamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.orange));
+                } else {
+                    // Le EditText n'a pas le focus, changer la couleur du textHint à sa couleur d'origine
+                    dividerNicknamePet.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.lightGray));
+                }
+            }
+        });
 
     private void loadPetDetails() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             String imgPet = bundle.getString("img");
+          
             initialImageUri = imgPet;
-            Picasso.get().load(imgPet).into(uploadBtn);
+            Picasso.get().load(imgPet).into(UploadBtn);
 
             String namePet = bundle.getString("name");
             etFirstName.setText(namePet);

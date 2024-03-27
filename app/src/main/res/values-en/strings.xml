@@ -31,7 +31,8 @@
     <string name="code_input">Code</string>
     <string name="inside_message">Inside</string>
     <string name="outside_message">Outside</string>
-    <string name="home_message">The door is unlocked</string>
+    <string name="home_unlock_message">The door is unlocked</string>
+    <string name="home_lock_message">The door is locked</string>
     <string name="forgot_message">Forgot your password?</string>
     <string name="preregister_message">No account yet?</string>
     <string name="register_message">Create your account</string>

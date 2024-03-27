@@ -57,17 +57,19 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListPet"
-        android:layout_width="409dp"
+        android:layout_width="wrap_content"
         android:layout_height="410dp"
         android:visibility="gone"
         android:layout_marginTop="17dp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" >
-
+        app:layout_constraintVertical_bias="0.0"
+        app:spanCount="2" />
     </androidx.recyclerview.widget.RecyclerView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

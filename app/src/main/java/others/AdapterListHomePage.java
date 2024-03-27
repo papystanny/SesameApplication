@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sesameapplication.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import unique.Pet;
+import unique.PetActivity;
 
 public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePage.ViewHolder>{
 
@@ -27,11 +30,13 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
 
     InterfacePet interfacePet;
     List<Pet> list;
+    List<PetActivity> listActivity;
 
-    public AdapterListHomePage(List<Pet> list, InterfacePet interfacePet)
+    public AdapterListHomePage(List<Pet> list, InterfacePet interfacePet, List<PetActivity> listActivity)
     {
         this.list = list;
         this.interfacePet = interfacePet;
+        this.listActivity = listActivity;
     }
 
     @NonNull
@@ -45,13 +50,20 @@ public class AdapterListHomePage extends RecyclerView.Adapter<AdapterListHomePag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        if (list.get(position).getIsOutside() == 0)
-        {
-            vh.tvStatus.setText("Entrée");
-        }
-        else
-        {
-            vh.tvStatus.setText("Sortie");
+        Collections.reverse(listActivity);
+        for (PetActivity petActivity : listActivity) {
+            if (petActivity.getCollar_tag().equals(list.get(position).getCollar_tag()) && petActivity.isInOrOut() == 1) {
+                if (Locale.getDefault().getLanguage().equals("fr"))
+                    vh.tvStatus.setText("Sortie");
+                else
+                    vh.tvStatus.setText("Outside");
+            }
+            if (petActivity.getCollar_tag().equals(list.get(position).getCollar_tag()) && petActivity.isInOrOut() == 0) {
+                if (Locale.getDefault().getLanguage().equals("fr"))
+                    vh.tvStatus.setText("Entrée");
+                else
+                    vh.tvStatus.setText("Inside");
+            }
         }
         Picasso.get().load(list.get(position).getImg()).into(vh.ivPet);
     }
