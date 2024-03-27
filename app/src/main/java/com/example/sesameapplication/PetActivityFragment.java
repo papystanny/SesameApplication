@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import others.AdapterListActivity;
@@ -29,6 +30,7 @@ import java.util.List;
 public class PetActivityFragment extends Fragment implements AdapterListActivity.InterfacePetActivity {
 
     View view;
+    TextView tvMessageRvVide;
     RecyclerView rvPetActivity;
     AdapterListActivity adapterList;
     public static List<PetActivity> listPetActivity = new ArrayList<>();
@@ -50,6 +52,8 @@ public class PetActivityFragment extends Fragment implements AdapterListActivity
         rvPetActivity.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterList = new AdapterListActivity(listPetActivity, this, listPet);
         rvPetActivity.setAdapter(adapterList);
+        tvMessageRvVide = view.findViewById(R.id.tvMessageRvVide);
+
 
         return view;
     }
@@ -72,11 +76,15 @@ public class PetActivityFragment extends Fragment implements AdapterListActivity
                         String created_at = petActivity.getCreated_at();
                         String collar_tag = petActivity.getCollar_tag();
                         listPetActivity.add(new PetActivity(inOrOut, created_at, collar_tag));
-                        adapterList.notifyDataSetChanged();
                     }
-                    if (adapterList.getItemCount() == 0){
-                        rvPetActivity.visi;
+                    if (!listPetActivity.isEmpty()){
+                        rvPetActivity.setVisibility(View.VISIBLE);
+                        tvMessageRvVide.setVisibility(View.GONE);
+                    } else {
+                        rvPetActivity.setVisibility(View.GONE);
+                        tvMessageRvVide.setVisibility(View.VISIBLE);
                     }
+                    adapterList.notifyDataSetChanged();
                 }
                 else {
                     Toast.makeText(getContext(), "BAD RESPONSE : " + response.errorBody(), Toast.LENGTH_LONG).show();
