@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
     RecyclerView rvListPet;
     AdapterListModifyPets adapterListModifyPets;
     List<Pet> listPet = new ArrayList<>();
+
+    TextView tvTitlePetsPlus , tvPet_edit , tvNoPetYet;
     Bundle bundle = new Bundle();
     public ListPetsFragment() {
         // Required empty public constructor
@@ -54,6 +57,8 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
         rvListPet.setLayoutManager(new GridLayoutManager(getContext(), 2));
         adapterListModifyPets = new AdapterListModifyPets(listPet, this, getActivity(), bundle);
         rvListPet.setAdapter(adapterListModifyPets);
+        tvNoPetYet = view.findViewById(R.id.tvNoPetYet);
+        tvPet_edit = view.findViewById(R.id.tvPet_edit);
 
         return view;
     }
@@ -61,7 +66,7 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
     private void getPets() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", getContext().MODE_PRIVATE);
         String token = sharedPreferences.getString("token", "");
-        String authToken = "Bearer " + token; // Formatage du token
+        String authToken = "Bearer " + token;
         int userId = sharedPreferences.getInt("id", 0);
         InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
         Call<List<Pet>> call = interfaceServer.getPetsByUser(authToken, userId);
@@ -78,6 +83,16 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
                         adapterListModifyPets.notifyDataSetChanged();
                     }*/
                     adapterListModifyPets.setList(response.body());
+                    if (!response.body().isEmpty()){
+                        rvListPet.setVisibility(View.VISIBLE);
+                        tvNoPetYet.setVisibility(View.GONE);
+                        tvPet_edit.setVisibility(View.VISIBLE);
+                    } else {
+                        rvListPet.setVisibility(View.GONE);
+                        tvNoPetYet.setVisibility(View.VISIBLE);
+                        tvPet_edit.setVisibility(View.GONE);
+                    }
+                    adapterListModifyPets.notifyDataSetChanged();
                 }
             }
             @Override
@@ -89,10 +104,15 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
     }
 
 
+
     @Override
     public void gestionClick(int position, Pet pet) {
         bundle.putString("img", pet.getImg());
         bundle.putString("name", pet.getName());
         bundle.putString("nickname", pet.getNickname());
+        bundle.putInt("id", pet.getId()); // Suppose que votre objet Pet a une méthode getId()
+
+        navController.navigate(R.id.action_listPetsFragment_to_modifyPetsFragment, bundle);
+    }
     }
 }

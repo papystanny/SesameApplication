@@ -48,7 +48,9 @@
     <string name="lock_message">Verouillage</string>
     <string name="last_activity_message">Pas encore de sortie aujourd\'hui</string>
     <string name="total_activity_message">Pas encore de total encore</string>
-    <string name="no_activity_message">Aucune activité pour aujourdhui </string>
+    <string name="no_activity_message">Aucune activitée pour aujourdhui </string>
+    <string name="no_pet_message">Aucun animal pour le moment  </string>
+    <string name="pet_edit">Quel compagnon voulez-vous mettre à jour ?   </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="login_btn">Connexion</string>
 </resources>

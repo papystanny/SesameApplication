@@ -2,6 +2,8 @@ package reseau_api;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -9,8 +11,10 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import unique.LockSchedule;
@@ -65,11 +69,15 @@ public interface InterfaceServer {
     Call<SimpleApiResponse> getStatusDoor(
             @Header("Authorization") String authToken);
 
+
+
     @Headers("Accept: application/json")
     @GET("api/activity/{userID}")
     Call<List<PetActivity>> getPetActivity(
             @Header("Authorization") String authToken,
             @Path("userID") int userId);
+
+
     @Headers("Accept: application/json")
     @GET("api/lock_schedules/{userID}")
     Call<List<LockSchedule>> getLockSchedules(
@@ -77,17 +85,23 @@ public interface InterfaceServer {
             @Path("userID") int userId);
 
     @Headers("Accept: application/json")
+    @Multipart
     @POST("api/pets")
-    @FormUrlEncoded
-    Call<Pet> addPet(@Header("Authorization") String authToken,
-                     @Field("name") String name,
-                     @Field("nickname") String nickname,
-                     @Field("img") String img,
-                     @Field("type") String type);
+    Call<Pet> addPet(
+            @Header("Authorization") String authToken,
+            @Part("name") RequestBody name,
+            @Part("nickname") RequestBody nickname,
+            @Part("type") RequestBody type,
+            @Part MultipartBody.Part fichier);
+
+
+
 
     @Headers("Accept: application/json")
     @POST("api/door/lockAndUnlockDoor")
     Call<SimpleApiResponse> lockAndUnlock(@Header("Authorization") String authToken );
+
+
 
     @Headers("Accept: application/json")
     @POST("api/lock_schedules")
@@ -97,10 +111,14 @@ public interface InterfaceServer {
                                        @Field("opening_time") String opening_time,
                                        @Field("closing_time") String closing_time,
                                        @Field("reccuring") int reccuring);
+
+
     @Headers("Accept: application/json")
     @DELETE("api/lock_schedules/{id}")
     Call<SimpleApiResponse> deleteLockSchedule(@Header("Authorization") String authToken,
                                                @Path("id") int id);
+
+
 
     @Headers("Accept: application/json")
     @PUT("api/user/{id}")
@@ -112,16 +130,21 @@ public interface InterfaceServer {
                           @Field("email") String email,
                           @Field("phone") String phone);
 
+
+
     @Headers("Accept: application/json")
     @PUT("api/lock_schedules/updateLockDoorStatusBySchedule")
     @FormUrlEncoded
     Call<LockSchedule> updateLockDoorStatusBySchedule(@Header("Authorization") String authToken);
+
 
     @Headers("Accept: application/json")
     @PUT("api/lock_schedules/recurring/{id}")
     @FormUrlEncoded
     Call<LockSchedule> updateRecurring(@Header("Authorization") String authToken,
                                        @Path("id") int id);
+
+
 
     @Headers("Accept: application/json")
     @PUT("api/pets/{id}")
@@ -131,6 +154,8 @@ public interface InterfaceServer {
                         @Field("name") String name,
                         @Field("nickname") String nickname,
                         @Field("img") String img);
+
+
     @Headers("Accept: application/json")
     @DELETE("api/pets/{id}")
     Call<SimpleApiResponse> deletePet(@Header("Authorization") String authToken,
