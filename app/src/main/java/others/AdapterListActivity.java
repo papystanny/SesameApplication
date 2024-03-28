@@ -1,20 +1,17 @@
 package others;
-
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sesameapplication.R;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
+import java.util.Locale;
 import reseau_api.InterfaceServer;
 import reseau_api.RetrofitInstance;
 import retrofit2.Call;
@@ -22,9 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import unique.Pet;
 import unique.PetActivity;
-
 public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivity.ViewHolder>{
-
     // VARIABLES
     TextView tvInOrOut, tvDate, tvTime;
     ImageView ivPet;
@@ -35,14 +30,12 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
     List<PetActivity> listPetActivity;
     List<Pet> listPet;
 
-
     // CONSTRUCTOR
     public AdapterListActivity(List<PetActivity> listPetActivity, InterfacePetActivity interfacePetActivity, List<Pet> listPet) {
         this.listPetActivity = listPetActivity;
         this.interfacePetActivity = interfacePetActivity;
         this.listPet = listPet;
     }
-
 
     // METHODS
     @NonNull
@@ -52,15 +45,20 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
         View view = inflater.inflate(R.layout.pet_activity_layout,parent,false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         if (listPetActivity.get(position).isInOrOut() == 1) {
-            vh.tvInOrOut.setText("Sortie");
+            if (Locale.getDefault().getLanguage().equals("fr"))
+                vh.tvInOrOut.setText("Sortie");
+            else
+                vh.tvInOrOut.setText("Outside");
             vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_output_circle, 0, 0, 0);
         } else {
-            vh.tvInOrOut.setText("Entrée");
+            if (Locale.getDefault().getLanguage().equals("fr"))
+                vh.tvInOrOut.setText("Entrée");
+            else
+                vh.tvInOrOut.setText("Inside");
             vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_input_circle, 0, 0, 0);
         }
         InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
@@ -68,7 +66,20 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                vh.tvDate.setText(response.body());
+                if (Locale.getDefault().getLanguage().equals("fr"))
+                {
+                    vh.tvDate.setText(response.body());
+                }
+                else{
+                    if (response.body().equals("Aujourd'hui"))
+                        vh.tvDate.setText("Today");
+                    else if (response.body().equals("Hier"))
+                        vh.tvDate.setText("Yesterday");
+                    else if (response.body().equals("Avant-hier"))
+                        vh.tvDate.setText("Two days ago");
+                    else
+                        vh.tvDate.setText(response.body());
+                }
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
@@ -82,27 +93,22 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
             }
         }
     }
-
     @Override
     public int getItemCount() {
         return listPetActivity.size();
     }
-
     public void addPetActivity(PetActivity petActivity) {
         listPetActivity.add(petActivity);
         notifyItemInserted(listPetActivity.size() - 1);
     }
-
     public void removePetActivity(int position) {
         listPetActivity.remove(position);
         notifyItemRemoved(position);
     }
-
     public void editPetActivity(int position, PetActivity petActivity) {
         listPetActivity.set(position, petActivity);
         notifyItemChanged(position);
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvInOrOut, tvDate, tvTime;
         ImageView ivPet;
@@ -121,3 +127,4 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
         }
     }
 }
+
