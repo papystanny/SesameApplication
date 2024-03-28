@@ -52,7 +52,7 @@
             android:id="@+id/ivPetCompagnon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/drawable_upload_pet_pic" />
     </androidx.cardview.widget.CardView>
 
@@ -96,22 +96,22 @@
         android:id="@+id/btNextPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:src="@drawable/drawable_nextpage"
-        app:layout_constraintBottom_toTopOf="@+id/tvTimeOut"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
 
     <ImageView
         android:id="@+id/btPreviousPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:rotationY="180"
         android:src="@drawable/drawable_nextpage"
-        app:layout_constraintBottom_toTopOf="@+id/tvTimeOut"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,7 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
     List<Pet> listPet = new ArrayList<>();
 
     TextView tvTitlePetsPlus , tvPet_edit , tvNoPetYet;
-
+    Bundle bundle = new Bundle();
     public ListPetsFragment() {
         // Required empty public constructor
     }
@@ -55,9 +55,9 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
 
 
         rvListPet.setHasFixedSize(true);
-        rvListPet.setLayoutManager(new GridLayoutManager(getContext(), LinearLayoutManager.VERTICAL));
+        rvListPet.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        adapterListModifyPets = new AdapterListModifyPets(listPet, this);
+        adapterListModifyPets = new AdapterListModifyPets(listPet, this, getActivity(), bundle);
         rvListPet.setAdapter(adapterListModifyPets);
         tvNoPetYet = view.findViewById(R.id.tvNoPetYet);
         tvPet_edit = view.findViewById(R.id.tvPet_edit);
@@ -109,15 +109,8 @@ public class ListPetsFragment extends Fragment implements AdapterListModifyPets.
 
     @Override
     public void gestionClick(int position, Pet pet) {
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
-        Bundle bundle = new Bundle();
         bundle.putString("img", pet.getImg());
         bundle.putString("name", pet.getName());
         bundle.putString("nickname", pet.getNickname());
-        bundle.putInt("id", pet.getId()); // Suppose que votre objet Pet a une méthode getId()
-
-        navController.navigate(R.id.action_listPetsFragment_to_modifyPetsFragment, bundle);
     }
-
-
 }

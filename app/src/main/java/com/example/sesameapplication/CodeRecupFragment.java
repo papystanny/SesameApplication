@@ -92,7 +92,7 @@ public class CodeRecupFragment extends Fragment {
                         Toast.makeText(getContext(), "la faute est ici", Toast.LENGTH_SHORT).show();
                     }
                 //    Log.e("code_recup", testE);
-                     Toast.makeText(getContext(), testE, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), testE, Toast.LENGTH_SHORT).show();
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
                     navController.navigate(R.id.fromEmailRecupCodeToPasswordRecup,bundle);
                 } else {

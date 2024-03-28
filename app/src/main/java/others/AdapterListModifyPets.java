@@ -1,5 +1,9 @@
 package others;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sesameapplication.R;
@@ -15,6 +21,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import reseau_api.InterfaceServer;
+import reseau_api.RetrofitInstance;
+import reseau_api.SimpleApiResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import unique.Pet;
 
 public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModifyPets.ViewHolder>{
@@ -25,11 +37,15 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
 
     InterfaceModifyPets interfaceModifyPets;
     List<Pet> list;
+    Activity activity;
+    Bundle bundle;
 
-    public AdapterListModifyPets(List<Pet> list, InterfaceModifyPets interfaceModifyPets)
+    public AdapterListModifyPets(List<Pet> list, InterfaceModifyPets interfaceModifyPets, Activity activity, Bundle bundle)
     {
         this.list = list;
         this.interfaceModifyPets = interfaceModifyPets;
+        this.activity = activity;
+        this.bundle = bundle;
     }
 
     @NonNull
@@ -57,6 +73,8 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
                     Pet pet = list.get(adapterPosition);
                     interfaceModifyPets.gestionClick(adapterPosition, pet);
                 }
+                NavController navController = Navigation.findNavController(activity, R.id.fragmentContainerView);
+                navController.navigate(R.id.action_listPetsFragment_to_modifyPetsFragment, bundle);
             }
         });
     }
@@ -75,6 +93,8 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ibPet;
         TextView tvName;
+        int position;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ibPet = itemView.findViewById(R.id.ibPet);
@@ -84,8 +104,27 @@ public class AdapterListModifyPets extends RecyclerView.Adapter<AdapterListModif
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-
-                    //call delete pets
+                    position = getAdapterPosition();
+                    interfaceModifyPets.gestionClick(position, list.get(position));
+                    SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPrefs", activity.MODE_PRIVATE);
+                    String token = sharedPreferences.getString("token", "");
+                    String authToken = "Bearer " + token;
+                    InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+                    Call<SimpleApiResponse> call = interfaceServer.deletePet(authToken, list.get(position).getId());
+                    call.enqueue(new Callback<SimpleApiResponse>() {
+                        @Override
+                        public void onResponse(Call<SimpleApiResponse> call, Response<SimpleApiResponse> response) {
+                            if (response.isSuccessful()) {
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, list.size());
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<SimpleApiResponse> call, Throwable t) {
+                            Log.d("Pet", "onFailure: " + t.getMessage());
+                        }
+                    });
                     return false;
                 }
             });

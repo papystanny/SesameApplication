@@ -142,7 +142,6 @@ public interface InterfaceServer {
 
     @Headers("Accept: application/json")
     @PUT("api/lock_schedules/recurring/{id}")
-    @FormUrlEncoded
     Call<LockSchedule> updateRecurring(@Header("Authorization") String authToken,
                                        @Path("id") int id);
 

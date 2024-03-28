@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // Back arrow
-                if (destination.getId() == R.id.fragment_create_account || destination.getId() == R.id.fragment_email_recup || destination.getId() == R.id.fragment_email_recup_code || destination.getId() == R.id.fragment_password_recup || destination.getId() == R.id.profileFragment || destination.getId() == R.id.createScheduleFragment || destination.getId() == R.id.addPetsFragment) {
+                if (destination.getId() == R.id.fragment_create_account || destination.getId() == R.id.fragment_email_recup || destination.getId() == R.id.fragment_email_recup_code || destination.getId() == R.id.fragment_password_recup || destination.getId() == R.id.profileFragment || destination.getId() == R.id.createScheduleFragment || destination.getId() == R.id.addPetsFragment ||  destination.getId() == R.id.listPetsFragment ||  destination.getId() == R.id.modifyPetsFragment  ) {
                     // Sinon, affichez le LinearLayout
                     backArrow.setVisibility(View.VISIBLE);
                 } else {
