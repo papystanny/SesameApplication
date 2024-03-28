@@ -95,6 +95,8 @@ public interface InterfaceServer {
             @Part MultipartBody.Part fichier);
 
 
+    @GET("api/howLongAgo/{created_at}")
+    Call<String> howLongAgo(@Path("created_at") String created_at);
 
 
     @Headers("Accept: application/json")

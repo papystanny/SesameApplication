@@ -48,4 +48,6 @@
     <string name="no_activity_message">No activity yet today</string>
     <string name="no_pet_message">No pet yet </string>
     <string name="pet_edit"> Which pet do you want edit ? </string>
+    <string name="home_lock_message">The door  is locked</string>
+    <string name="home_unlock_message">The door is unlocked</string>
 </resources>

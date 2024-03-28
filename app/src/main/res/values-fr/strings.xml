@@ -48,4 +48,6 @@
     <string name="no_activity_message">Aucune activitée pour aujourdhui </string>
     <string name="no_pet_message">Aucun animal pour le moment  </string>
     <string name="pet_edit">Quel compagnon voulez-vous mettre à jour ?   </string>
+    <string name="home_lock_message">La porte est verrouillée</string>
+    <string name="home_unlock_message">La porte est déverouillée</string>
 </resources>

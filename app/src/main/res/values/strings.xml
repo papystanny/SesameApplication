@@ -50,6 +50,8 @@
     <string name="no_activity_message">Aucune activitée pour aujourdhui </string>
     <string name="no_pet_message">Aucun animal pour le moment  </string>
     <string name="pet_edit">Quel compagnon voulez-vous mettre à jour ?   </string>
+    <string name="home_unlock_message">La porte est déverrouillée</string>
+    <string name="home_lock_message">La porte est verrouillée</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="login_btn">Connexion</string>

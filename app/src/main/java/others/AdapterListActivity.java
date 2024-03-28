@@ -1,5 +1,6 @@
 package others;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import reseau_api.InterfaceServer;
+import reseau_api.RetrofitInstance;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import unique.Pet;
 import unique.PetActivity;
 
@@ -57,7 +63,18 @@ public class AdapterListActivity extends RecyclerView.Adapter<AdapterListActivit
             vh.tvInOrOut.setText("Entrée");
             vh.tvInOrOut.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawable_input_circle, 0, 0, 0);
         }
-        vh.tvDate.setText(listPetActivity.get(position).getDate());
+        InterfaceServer interfaceServer = RetrofitInstance.getInstance().create(InterfaceServer.class);
+        Call<String> call = interfaceServer.howLongAgo(listPetActivity.get(position).getCreated_at());
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                vh.tvDate.setText(response.body());
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("ERROR", t.getMessage());
+            }
+        });
         vh.tvTime.setText(listPetActivity.get(position).getTime());
         for (Pet pet : listPet) {
             if (listPetActivity.get(position).getCollar_tag().equals(pet.getCollar_tag())) {

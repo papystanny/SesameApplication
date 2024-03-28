@@ -76,27 +76,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-    <TextView
-        android:id="@+id/tvTimeOut"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="@string/total_activity_message"
-        android:textAlignment="center"
-        android:textColor="@color/lightGray"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvLastOut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
     <TextView
         android:id="@+id/tvLastOut"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
         android:fontFamily="@font/poppins"
         android:text="@string/last_activity_message"
         android:textAlignment="center"
@@ -105,7 +90,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTimeOut" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
     <ImageView
         android:id="@+id/btNextPage"
